@@ -50,7 +50,7 @@ private class GarlicWebviewCallbackReceiver : IGarlicWebviewCallback
 }
 </code></pre>
 
-Then, you can set your interface instance with <code>GarlicWebview.Instance.SetCallbackInterface()</code> method.
+Then, you can register your interface instance with <code>GarlicWebview.Instance.SetCallbackInterface()</code> method.
 <pre><code>
 //Instantiate your callback receiver.
 var callbackReceiver = new GarlicWebviewCallbackReceiver();
