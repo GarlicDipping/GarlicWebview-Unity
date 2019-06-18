@@ -43,7 +43,7 @@ namespace Garlic.Plugins.Webview
 				Debug.Log("GarlicWebview: onPageStarted [" + url + "]");
 			}
 
-			public void onReceiverdError(int errorCode, string description, string failingUrl)
+			public void onReceivedError(int errorCode, string description, string failingUrl)
 			{
 				Debug.Log("GarlicWebview: onReceiverdError [" + errorCode + "][" + description + "][" + failingUrl + "]");
 			}

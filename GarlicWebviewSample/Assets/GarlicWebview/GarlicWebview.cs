@@ -6,7 +6,7 @@ namespace Garlic.Plugins.Webview
 {
 	public interface IGarlicWebviewCallback
 	{
-		void onReceiverdError(int errorCode, string description, string failingUrl);
+		void onReceivedError(string message);
 		void onPageStarted(string url);
 		void onPageFinished(string url);
 		void onLoadResource(string url);
@@ -30,10 +30,10 @@ namespace Garlic.Plugins.Webview
 				this.callbackInterface = callbackInterface;
 			}
 
-			public void onReceiverdError(int errorCode, string description, string failingUrl)
+			public void onReceiverdError(string message)
 			{
 				if(callbackInterface == null) { return; }
-				callbackInterface.onReceiverdError(errorCode, description, failingUrl);
+				callbackInterface.onReceivedError(message);
 			}
 			public void onPageStarted(string url)
 			{
