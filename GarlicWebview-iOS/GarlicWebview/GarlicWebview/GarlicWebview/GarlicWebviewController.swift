@@ -10,11 +10,22 @@ import Foundation
 import UIKit
 import WebKit
 
+@objc
+public protocol GarlicWebviewProtocol: class {
+    func onReceivedError(message: String)
+    func onPageStarted(url: String)
+    func onPageFinished(url: String)
+    func onShow()
+    func onClose()
+}
+
+@objc
 public class GarlicWebviewController: NSObject {
     public static let shared = GarlicWebviewController()
     static let DEFAULT_MARGIN = CGFloat(30.0)
     static let CLOSE_BUTTON_SIZE = CGFloat(50.0)
     
+    var garlicDelegate: GarlicWebviewProtocol?
     var webViewDelegate: GarlicWebviewDelegate!
     var webView: WKWebView!
     var closeButton: UIButton!
@@ -23,7 +34,7 @@ public class GarlicWebviewController: NSObject {
         NotificationCenter.default.removeObserver(self)
     }
     
-    public func Initialize(parentUIView: UIView) {
+    public func Initialize(parentUIView: UIView, garlicDelegate: GarlicWebviewProtocol) {
         if(webView != nil) {
             //print("WebView Already Initialized!")
             return
@@ -34,9 +45,10 @@ public class GarlicWebviewController: NSObject {
                                                object: nil)
         
         let webConfiguration = WKWebViewConfiguration()
+        self.garlicDelegate = garlicDelegate
         webView = WKWebView(frame: CGRect.zero, configuration: webConfiguration)
         //webView = WKWebView(frame: parentUIView.frame, configuration: webConfiguration)
-        webViewDelegate = GarlicWebviewDelegate()
+        webViewDelegate = GarlicWebviewDelegate(parent: self)
         webView.uiDelegate = webViewDelegate
         webView.navigationDelegate = webViewDelegate
         webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -90,6 +102,7 @@ public class GarlicWebviewController: NSObject {
         }
         webView.isHidden = false
         closeButton.isHidden = false
+        garlicDelegate?.onShow()
         
         let myURL = URL(string:url)
         var myRequest = URLRequest(url: myURL!)
@@ -104,6 +117,7 @@ public class GarlicWebviewController: NSObject {
         }
         webView.isHidden = true
         closeButton.isHidden = true
+        garlicDelegate?.onClose()
         webView.stopLoading()
         webView.load(URLRequest(url: URL(string:"about:blank")!))
         ClearCache()
@@ -121,6 +135,7 @@ public class GarlicWebviewController: NSObject {
         webView = nil
         closeButton = nil
         webViewDelegate = nil
+        garlicDelegate = nil
     }
     
     public func SetMargins(parentUIView: UIView, left: CGFloat, top: CGFloat, right: CGFloat, bottom: CGFloat) {
@@ -201,24 +216,50 @@ public class GarlicWebviewController: NSObject {
     }
     
     internal class GarlicWebviewDelegate : NSObject, WKNavigationDelegate, WKUIDelegate {
+        weak var parent: GarlicWebviewController?
+        init (parent: GarlicWebviewController) {
+            self.parent = parent
+        }
         public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+            if(webView.isHidden) {
+                return
+            }
+            let url = webView.url?.absoluteString ?? ""
+            parent?.garlicDelegate?.onPageFinished(url: url)
             print("WebView content load done / OnPageFinished")
         }
         
         public func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+            if(webView.isHidden) {
+                return
+            }
+            let url = webView.url?.absoluteString ?? ""
+            parent?.garlicDelegate?.onPageStarted(url: url)
             print("WebView content load start / OnPageStarted")
         }
         
         public func webView(_ webView: WKWebView, didFail: WKNavigation!, withError: Error) {
-            print("WebView content load failed / OnPageError")
+            if(webView.isHidden) {
+                return
+            }
+            parent?.garlicDelegate?.onReceivedError(message: withError.localizedDescription)
+            print("WebView content load failed / OnPageError:[\(withError.localizedDescription)]")
         }
         
         public func webView(_ webView: WKWebView, didFailProvisionalNavigation: WKNavigation!, withError: Error) {
-            print("WebView content load failed / OnPageError")
+            if(webView.isHidden) {
+                return
+            }
+            parent?.garlicDelegate?.onReceivedError(message: withError.localizedDescription)
+            print("WebView content load failed / OnPageError:[\(withError.localizedDescription)]")
         }
         
         public func webView(_ uiWebView: UIWebView, didFailLoadWithError: Error) {
-            print("WebView content load failed / OnPageError")
+            if(uiWebView.isHidden) {
+                return
+            }
+            parent?.garlicDelegate?.onReceivedError(message: didFailLoadWithError.localizedDescription)
+            print("WebView content load failed / OnPageError:[\(didFailLoadWithError.localizedDescription)]")
         }
     }
 }

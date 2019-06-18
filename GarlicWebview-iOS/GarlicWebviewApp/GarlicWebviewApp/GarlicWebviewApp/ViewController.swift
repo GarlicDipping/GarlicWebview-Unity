@@ -9,6 +9,28 @@
 import UIKit
 import GarlicWebview
 
+class TestProtocol : GarlicWebviewProtocol {
+    func onReceivedError(message: String) {
+        print("onReceivedError: " + message)
+    }
+    
+    func onPageStarted(url: String) {
+        print("onPageStarted: " +  url)
+    }
+    
+    func onPageFinished(url: String) {
+        print("onPageFinished: " + url)
+    }
+    
+    func onShow() {
+        print("onShow")
+    }
+    
+    func onClose() {
+        print("onClose")
+    }
+}
+
 class ViewController: UIViewController {
     
     override var prefersHomeIndicatorAutoHidden: Bool {
@@ -21,7 +43,7 @@ class ViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        GarlicWebviewController.shared.Initialize(parentUIView: self.view!)
+        GarlicWebviewController.shared.Initialize(parentUIView: self.view!, garlicDelegate: TestProtocol())
     }
     
     @IBAction func onClick(_ sender: UIButton) {
