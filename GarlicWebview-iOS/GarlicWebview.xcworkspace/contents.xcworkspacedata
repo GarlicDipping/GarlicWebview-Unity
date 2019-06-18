@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:GarlicWebviewiOS-Bridge/GarlicWebviewiOS-Bridge/GarlicWebviewiOS-Bridge.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:GarlicWebview/GarlicWebview/GarlicWebview.xcodeproj">
    </FileRef>
    <FileRef
