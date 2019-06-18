@@ -18,7 +18,7 @@ namespace Garlic.Plugins.Webview
 
 		public void OnClickShowWebview()
 		{
-			GarlicWebview.Instance.Show(urlText.text);
+			GarlicWebview.Instance.ShowWebview(urlText.text);
 		}
 
 		private class GarlicWebviewCallbackReceiver : IGarlicWebviewCallback
@@ -43,9 +43,9 @@ namespace Garlic.Plugins.Webview
 				Debug.Log("GarlicWebview: onPageStarted [" + url + "]");
 			}
 
-			public void onReceivedError(int errorCode, string description, string failingUrl)
+			public void onReceivedError(string errorMessage)
 			{
-				Debug.Log("GarlicWebview: onReceiverdError [" + errorCode + "][" + description + "][" + failingUrl + "]");
+				Debug.Log("GarlicWebview: onReceivedError [" + errorMessage + "]");
 			}
 
 			public void onShow()
