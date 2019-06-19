@@ -76,13 +76,7 @@ public class GarlicWebviewController: NSObject {
     
     @objc func onRotate() {
         if webView != nil {
-            webView.frame = GetDefaultMarginedFrame(parentUIView: webView.superview!)
-            let buttonSize = GarlicWebviewController.CLOSE_BUTTON_SIZE
-            closeButton.frame = CGRect.init(x: webView.frame.maxX - buttonSize / 2,
-                                            y: webView.frame.minY - buttonSize / 2,
-                                            width: buttonSize,
-                                            height: buttonSize)
-            closeButton.setNeedsLayout()
+            self.RefreshLayout()
             //print("Rotated! webview frame: " + webView.frame.debugDescription + ", closeButton frame: " + closeButton.frame.debugDescription)
         }
     }
@@ -96,6 +90,7 @@ public class GarlicWebviewController: NSObject {
             print("WebView NOT initialized!")
             return
         }
+        self.RefreshLayout()
         webView.isHidden = false
         closeButton.isHidden = false
         garlicDelegate?.onShow()
@@ -144,6 +139,15 @@ public class GarlicWebviewController: NSObject {
         let scale = 1.0 / self.GetScale(parentUIView: parentUIView)
         frame = GetMarginedFrame(originalFrame: frame, safeAreaBound: screen, scale: scale, left: left, top: top, right: right, bottom: bottom)
         webView.frame = frame
+    }
+    
+    private func RefreshLayout() {
+        webView.frame = GetDefaultMarginedFrame(parentUIView: webView.superview!)
+        let buttonSize = GarlicWebviewController.CLOSE_BUTTON_SIZE
+        closeButton.frame = CGRect.init(x: webView.frame.maxX - buttonSize / 2,
+                                        y: webView.frame.minY - buttonSize / 2,
+                                        width: buttonSize,
+                                        height: buttonSize)
     }
     
     private func GetDefaultMarginedFrame(parentUIView: UIView) -> CGRect {
