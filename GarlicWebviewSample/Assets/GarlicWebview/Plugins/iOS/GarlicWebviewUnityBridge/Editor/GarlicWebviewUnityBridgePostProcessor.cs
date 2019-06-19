@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using UnityEditor.iOS.Xcode.Extensions;
 
 public static class GarlicWebviewUnityBridgePostProcessor {
 	[PostProcessBuild]
@@ -24,6 +25,13 @@ public static class GarlicWebviewUnityBridgePostProcessor {
 			proj.AddBuildProperty(targetGuid, "SWIFT_OBJC_BRIDGING_HEADER", "Libraries/GarlicWebview/Plugins/iOS/GarlicWebviewUnityBridge/Classes/GarlicWebviewUnityBridge-Bridging-Header.h");
 			proj.AddBuildProperty(targetGuid, "SWIFT_OBJC_INTERFACE_HEADER_NAME", "GarlicWebviewUnityBridge/GarlicWebviewUnityBridge-Swift.h");
 			proj.SetBuildProperty (targetGuid, "SWIFT_VERSION", "5.0");
+
+			const string defaultLocationInProj = "GarlicWebview/Plugins/iOS/";
+			const string coreFrameworkName = "GarlicWebview.framework";
+			string framework = Path.Combine(defaultLocationInProj, coreFrameworkName);
+			string fileGuid = proj.AddFile(framework, "Frameworks/" + framework, PBXSourceTree.Sdk);
+			proj.SetBuildProperty(targetGuid, "LD_RUNPATH_SEARCH_PATHS", "$(inherited) @executable_path/Frameworks");
+			PBXProjectExtensions.AddFileToEmbedFrameworks(proj, targetGuid, fileGuid);
 			//proj.AddBuildProperty(targetGuid, "LD_RUNPATH_SEARCH_PATHS", "@executable_path/Frameworks");
 
 			proj.WriteToFile(projPath);

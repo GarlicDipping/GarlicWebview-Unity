@@ -7,17 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7551662122BA19EF00E04540 /* GarlicWebview.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7551662022BA19EF00E04540 /* GarlicWebview.framework */; };
 		7569E5C922B9F9980087A7A6 /* GarlicWebviewWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 7569E5C822B9F9980087A7A6 /* GarlicWebviewWrapper.h */; };
 		7569E5E722BA002C0087A7A6 /* GarlicWebviewUnityWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7569E5E622BA002C0087A7A6 /* GarlicWebviewUnityWrapper.swift */; };
-		7569E5E922BA00DB0087A7A6 /* GarlicWebview.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7569E5E822BA00DB0087A7A6 /* GarlicWebview.framework */; };
 		75D626CF22B9F8C200F56A8F /* GarlicWebviewUnityBridge.h in Headers */ = {isa = PBXBuildFile; fileRef = 75D626CD22B9F8C200F56A8F /* GarlicWebviewUnityBridge.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		75D626DC22B9F96800F56A8F /* GarlicWebviewWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 75D626DB22B9F96800F56A8F /* GarlicWebviewWrapper.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7551662022BA19EF00E04540 /* GarlicWebview.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GarlicWebview.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7569E5C822B9F9980087A7A6 /* GarlicWebviewWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GarlicWebviewWrapper.h; sourceTree = "<group>"; };
 		7569E5E622BA002C0087A7A6 /* GarlicWebviewUnityWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GarlicWebviewUnityWrapper.swift; sourceTree = "<group>"; };
-		7569E5E822BA00DB0087A7A6 /* GarlicWebview.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GarlicWebview.framework; sourceTree = "<group>"; };
 		7569E5EA22BA02280087A7A6 /* GarlicWebviewUnityBridge-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GarlicWebviewUnityBridge-Bridging-Header.h"; sourceTree = "<group>"; };
 		75D626CA22B9F8C200F56A8F /* GarlicWebviewUnityBridge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GarlicWebviewUnityBridge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		75D626CD22B9F8C200F56A8F /* GarlicWebviewUnityBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GarlicWebviewUnityBridge.h; sourceTree = "<group>"; };
@@ -30,19 +30,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7569E5E922BA00DB0087A7A6 /* GarlicWebview.framework in Frameworks */,
+				7551662122BA19EF00E04540 /* GarlicWebview.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7551661F22BA19EF00E04540 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7551662022BA19EF00E04540 /* GarlicWebview.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		75D626C022B9F8C200F56A8F = {
 			isa = PBXGroup;
 			children = (
-				75D626D522B9F8EE00F56A8F /* Frameworks */,
 				75D626CC22B9F8C200F56A8F /* GarlicWebviewUnityBridge */,
 				75D626CB22B9F8C200F56A8F /* Products */,
+				7551661F22BA19EF00E04540 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -62,15 +70,6 @@
 				75D626CE22B9F8C200F56A8F /* Info.plist */,
 			);
 			path = GarlicWebviewUnityBridge;
-			sourceTree = "<group>";
-		};
-		75D626D522B9F8EE00F56A8F /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				7569E5E822BA00DB0087A7A6 /* GarlicWebview.framework */,
-			);
-			name = Frameworks;
-			path = GarlicWebviewUnityBridge/Frameworks;
 			sourceTree = "<group>";
 		};
 		75D626D822B9F90500F56A8F /* Classes */ = {
