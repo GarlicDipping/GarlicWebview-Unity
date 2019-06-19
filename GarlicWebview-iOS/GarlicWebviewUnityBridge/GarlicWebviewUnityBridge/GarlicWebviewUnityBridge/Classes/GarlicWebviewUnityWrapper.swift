@@ -28,23 +28,23 @@ import UIKit
     }
     
     public func onReceivedError(message: String) {
-        UnitySendMessage("GarlicWebview", "onReceivedError", message)
+        UnitySendMessage("GarlicWebview", "__fromnative_onReceivedError", message)
     }
     
     public func onPageStarted(url: String) {
-        UnitySendMessage("GarlicWebview", "onPageStarted", url)
+        UnitySendMessage("GarlicWebview", "__fromnative_onPageStarted", url)
     }
     
     public func onPageFinished(url: String) {
-        UnitySendMessage("GarlicWebview", "onPageFinished", url)
+        UnitySendMessage("GarlicWebview", "__fromnative_onPageFinished", url)
     }
     
     public func onShow() {
-        UnitySendMessage("GarlicWebview", "onShow", "")
+        UnitySendMessage("GarlicWebview", "__fromnative_onShow", "")
     }
     
     public func onClose() {
-        UnitySendMessage("GarlicWebview", "onClose", "")
+        UnitySendMessage("GarlicWebview", "__fromnative_onClose", "")
     }
     
 }
