@@ -8,6 +8,9 @@
 
 import Foundation
 import GarlicWebview
+import UIKit
+
+extern void UnitySendMessage(const char *, const char *, const char *);
 
 @objc public class GarlicWebviewUnityWrapper : NSObject, GarlicWebviewProtocol {
     @objc public func Initialize(parentUIView:UIViewController) {
@@ -26,23 +29,23 @@ import GarlicWebview
         GarlicWebviewController.shared.Dispose()
     }
     
-    func onReceivedError(message: String) {
+    public func onReceivedError(message: String) {
         UnitySendMessage("GarlicWebview", "onReceivedError", message)
     }
     
-    func onPageStarted(url: String) {
+    public func onPageStarted(url: String) {
         UnitySendMessage("GarlicWebview", "onPageStarted", url)
     }
     
-    func onPageFinished(url: String) {
+    public func onPageFinished(url: String) {
         UnitySendMessage("GarlicWebview", "onPageFinished", url)
     }
     
-    func onShow() {
+    public func onShow() {
         UnitySendMessage("GarlicWebview", "onShow", "")
     }
     
-    func onClose() {
+    public func onClose() {
         UnitySendMessage("GarlicWebview", "onClose", "")
     }
     
