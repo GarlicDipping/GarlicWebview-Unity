@@ -12,11 +12,11 @@ import WebKit
 
 @objc
 public protocol GarlicWebviewProtocol: class {
-    func onReceivedError(message: String)
-    func onPageStarted(url: String)
-    func onPageFinished(url: String)
-    func onShow()
-    func onClose()
+    @objc func onReceivedError(message: String)
+    @objc func onPageStarted(url: String)
+    @objc func onPageFinished(url: String)
+    @objc func onShow()
+    @objc func onClose()
 }
 
 @objc
@@ -53,7 +53,7 @@ public class GarlicWebviewController: NSObject {
         webView.navigationDelegate = webViewDelegate
         webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         webView.isHidden = true
-        webView.translatesAutoresizingMaskIntoConstraints = false
+        //webView.translatesAutoresizingMaskIntoConstraints = false
         parentUIView.addSubview(webView)
         
         let bundle = Bundle(for: type(of: self))
@@ -70,7 +70,7 @@ public class GarlicWebviewController: NSObject {
         closeButton.setImage(buttonImage, for: .normal)
         closeButton.addTarget(self, action: #selector(onClickClose), for: .touchUpInside)
         closeButton.isHidden = true
-        closeButton.translatesAutoresizingMaskIntoConstraints = false
+        //closeButton.translatesAutoresizingMaskIntoConstraints = false
         parentUIView.addSubview(closeButton)
     }
     
@@ -82,12 +82,8 @@ public class GarlicWebviewController: NSObject {
                                             y: webView.frame.minY - buttonSize / 2,
                                             width: buttonSize,
                                             height: buttonSize)
-        }
-        
-        if UIDevice.current.orientation.isLandscape {
-            //print("Landscape")
-        } else {
-            //print("Portrait")
+            closeButton.setNeedsLayout()
+            //print("Rotated! webview frame: " + webView.frame.debugDescription + ", closeButton frame: " + closeButton.frame.debugDescription)
         }
     }
     

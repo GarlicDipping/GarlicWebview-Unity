@@ -7,107 +7,106 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7533A45E22B9F04900F75B79 /* GarlicWebviewUnityBridge.h in Headers */ = {isa = PBXBuildFile; fileRef = 7533A45C22B9F04900F75B79 /* GarlicWebviewUnityBridge.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7533A46A22B9F07500F75B79 /* GarlicWebviewWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7533A46522B9F07500F75B79 /* GarlicWebviewWrapper.mm */; };
-		7533A46B22B9F07500F75B79 /* GarlicWebviewUnityWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7533A46622B9F07500F75B79 /* GarlicWebviewUnityWrapper.swift */; };
-		7533A46C22B9F07500F75B79 /* GarlicWebviewWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 7533A46722B9F07500F75B79 /* GarlicWebviewWrapper.h */; };
-		7533A46D22B9F07500F75B79 /* GarlicWebviewUnityBridge-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = 7533A46822B9F07500F75B79 /* GarlicWebviewUnityBridge-Bridging-Header.h */; };
-		7533A46E22B9F07500F75B79 /* GarlicWebview.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7533A46922B9F07500F75B79 /* GarlicWebview.framework */; };
+		7569E5C922B9F9980087A7A6 /* GarlicWebviewWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 7569E5C822B9F9980087A7A6 /* GarlicWebviewWrapper.h */; };
+		7569E5E722BA002C0087A7A6 /* GarlicWebviewUnityWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7569E5E622BA002C0087A7A6 /* GarlicWebviewUnityWrapper.swift */; };
+		7569E5E922BA00DB0087A7A6 /* GarlicWebview.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7569E5E822BA00DB0087A7A6 /* GarlicWebview.framework */; };
+		75D626CF22B9F8C200F56A8F /* GarlicWebviewUnityBridge.h in Headers */ = {isa = PBXBuildFile; fileRef = 75D626CD22B9F8C200F56A8F /* GarlicWebviewUnityBridge.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		75D626DC22B9F96800F56A8F /* GarlicWebviewWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 75D626DB22B9F96800F56A8F /* GarlicWebviewWrapper.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		7533A45922B9F04900F75B79 /* GarlicWebviewUnityBridge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GarlicWebviewUnityBridge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7533A45C22B9F04900F75B79 /* GarlicWebviewUnityBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GarlicWebviewUnityBridge.h; sourceTree = "<group>"; };
-		7533A45D22B9F04900F75B79 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7533A46522B9F07500F75B79 /* GarlicWebviewWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GarlicWebviewWrapper.mm; sourceTree = "<group>"; };
-		7533A46622B9F07500F75B79 /* GarlicWebviewUnityWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GarlicWebviewUnityWrapper.swift; sourceTree = "<group>"; };
-		7533A46722B9F07500F75B79 /* GarlicWebviewWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GarlicWebviewWrapper.h; sourceTree = "<group>"; };
-		7533A46822B9F07500F75B79 /* GarlicWebviewUnityBridge-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GarlicWebviewUnityBridge-Bridging-Header.h"; sourceTree = "<group>"; };
-		7533A46922B9F07500F75B79 /* GarlicWebview.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GarlicWebview.framework; sourceTree = "<group>"; };
+		7569E5C822B9F9980087A7A6 /* GarlicWebviewWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GarlicWebviewWrapper.h; sourceTree = "<group>"; };
+		7569E5E622BA002C0087A7A6 /* GarlicWebviewUnityWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GarlicWebviewUnityWrapper.swift; sourceTree = "<group>"; };
+		7569E5E822BA00DB0087A7A6 /* GarlicWebview.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GarlicWebview.framework; sourceTree = "<group>"; };
+		7569E5EA22BA02280087A7A6 /* GarlicWebviewUnityBridge-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GarlicWebviewUnityBridge-Bridging-Header.h"; sourceTree = "<group>"; };
+		75D626CA22B9F8C200F56A8F /* GarlicWebviewUnityBridge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GarlicWebviewUnityBridge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		75D626CD22B9F8C200F56A8F /* GarlicWebviewUnityBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GarlicWebviewUnityBridge.h; sourceTree = "<group>"; };
+		75D626CE22B9F8C200F56A8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		75D626DB22B9F96800F56A8F /* GarlicWebviewWrapper.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = GarlicWebviewWrapper.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		7533A45622B9F04900F75B79 /* Frameworks */ = {
+		75D626C722B9F8C200F56A8F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7533A46E22B9F07500F75B79 /* GarlicWebview.framework in Frameworks */,
+				7569E5E922BA00DB0087A7A6 /* GarlicWebview.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7533A44F22B9F04900F75B79 = {
+		75D626C022B9F8C200F56A8F = {
 			isa = PBXGroup;
 			children = (
-				7533A45B22B9F04900F75B79 /* GarlicWebviewUnityBridge */,
-				7533A45A22B9F04900F75B79 /* Products */,
-				7533A46F22B9F08000F75B79 /* Frameworks */,
+				75D626D522B9F8EE00F56A8F /* Frameworks */,
+				75D626CC22B9F8C200F56A8F /* GarlicWebviewUnityBridge */,
+				75D626CB22B9F8C200F56A8F /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		7533A45A22B9F04900F75B79 /* Products */ = {
+		75D626CB22B9F8C200F56A8F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7533A45922B9F04900F75B79 /* GarlicWebviewUnityBridge.framework */,
+				75D626CA22B9F8C200F56A8F /* GarlicWebviewUnityBridge.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		7533A45B22B9F04900F75B79 /* GarlicWebviewUnityBridge */ = {
+		75D626CC22B9F8C200F56A8F /* GarlicWebviewUnityBridge */ = {
 			isa = PBXGroup;
 			children = (
-				7533A46422B9F07500F75B79 /* Classes */,
-				7533A45C22B9F04900F75B79 /* GarlicWebviewUnityBridge.h */,
-				7533A45D22B9F04900F75B79 /* Info.plist */,
+				75D626D822B9F90500F56A8F /* Classes */,
+				75D626CD22B9F8C200F56A8F /* GarlicWebviewUnityBridge.h */,
+				75D626CE22B9F8C200F56A8F /* Info.plist */,
 			);
 			path = GarlicWebviewUnityBridge;
 			sourceTree = "<group>";
 		};
-		7533A46422B9F07500F75B79 /* Classes */ = {
+		75D626D522B9F8EE00F56A8F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7533A46522B9F07500F75B79 /* GarlicWebviewWrapper.mm */,
-				7533A46622B9F07500F75B79 /* GarlicWebviewUnityWrapper.swift */,
-				7533A46722B9F07500F75B79 /* GarlicWebviewWrapper.h */,
-				7533A46822B9F07500F75B79 /* GarlicWebviewUnityBridge-Bridging-Header.h */,
+				7569E5E822BA00DB0087A7A6 /* GarlicWebview.framework */,
 			);
-			path = Classes;
+			name = Frameworks;
+			path = GarlicWebviewUnityBridge/Frameworks;
 			sourceTree = "<group>";
 		};
-		7533A46F22B9F08000F75B79 /* Frameworks */ = {
+		75D626D822B9F90500F56A8F /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				7533A46922B9F07500F75B79 /* GarlicWebview.framework */,
+				7569E5E622BA002C0087A7A6 /* GarlicWebviewUnityWrapper.swift */,
+				75D626DB22B9F96800F56A8F /* GarlicWebviewWrapper.mm */,
+				7569E5C822B9F9980087A7A6 /* GarlicWebviewWrapper.h */,
+				7569E5EA22BA02280087A7A6 /* GarlicWebviewUnityBridge-Bridging-Header.h */,
 			);
-			path = Frameworks;
+			path = Classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		7533A45422B9F04900F75B79 /* Headers */ = {
+		75D626C522B9F8C200F56A8F /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7533A46D22B9F07500F75B79 /* GarlicWebviewUnityBridge-Bridging-Header.h in Headers */,
-				7533A46C22B9F07500F75B79 /* GarlicWebviewWrapper.h in Headers */,
-				7533A45E22B9F04900F75B79 /* GarlicWebviewUnityBridge.h in Headers */,
+				7569E5C922B9F9980087A7A6 /* GarlicWebviewWrapper.h in Headers */,
+				75D626CF22B9F8C200F56A8F /* GarlicWebviewUnityBridge.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		7533A45822B9F04900F75B79 /* GarlicWebviewUnityBridge */ = {
+		75D626C922B9F8C200F56A8F /* GarlicWebviewUnityBridge */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7533A46122B9F04900F75B79 /* Build configuration list for PBXNativeTarget "GarlicWebviewUnityBridge" */;
+			buildConfigurationList = 75D626D222B9F8C200F56A8F /* Build configuration list for PBXNativeTarget "GarlicWebviewUnityBridge" */;
 			buildPhases = (
-				7533A45422B9F04900F75B79 /* Headers */,
-				7533A45522B9F04900F75B79 /* Sources */,
-				7533A45622B9F04900F75B79 /* Frameworks */,
-				7533A45722B9F04900F75B79 /* Resources */,
+				75D626C522B9F8C200F56A8F /* Headers */,
+				75D626C622B9F8C200F56A8F /* Sources */,
+				75D626C722B9F8C200F56A8F /* Frameworks */,
+				75D626C822B9F8C200F56A8F /* Resources */,
 			);
 			buildRules = (
 			);
@@ -115,42 +114,43 @@
 			);
 			name = GarlicWebviewUnityBridge;
 			productName = GarlicWebviewUnityBridge;
-			productReference = 7533A45922B9F04900F75B79 /* GarlicWebviewUnityBridge.framework */;
+			productReference = 75D626CA22B9F8C200F56A8F /* GarlicWebviewUnityBridge.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		7533A45022B9F04900F75B79 /* Project object */ = {
+		75D626C122B9F8C200F56A8F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = TeamTapas;
 				TargetAttributes = {
-					7533A45822B9F04900F75B79 = {
+					75D626C922B9F8C200F56A8F = {
 						CreatedOnToolsVersion = 10.2.1;
+						LastSwiftMigration = 1020;
 					};
 				};
 			};
-			buildConfigurationList = 7533A45322B9F04900F75B79 /* Build configuration list for PBXProject "GarlicWebviewUnityBridge" */;
+			buildConfigurationList = 75D626C422B9F8C200F56A8F /* Build configuration list for PBXProject "GarlicWebviewUnityBridge" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = 7533A44F22B9F04900F75B79;
-			productRefGroup = 7533A45A22B9F04900F75B79 /* Products */;
+			mainGroup = 75D626C022B9F8C200F56A8F;
+			productRefGroup = 75D626CB22B9F8C200F56A8F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				7533A45822B9F04900F75B79 /* GarlicWebviewUnityBridge */,
+				75D626C922B9F8C200F56A8F /* GarlicWebviewUnityBridge */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		7533A45722B9F04900F75B79 /* Resources */ = {
+		75D626C822B9F8C200F56A8F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -160,19 +160,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		7533A45522B9F04900F75B79 /* Sources */ = {
+		75D626C622B9F8C200F56A8F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7533A46A22B9F07500F75B79 /* GarlicWebviewWrapper.mm in Sources */,
-				7533A46B22B9F07500F75B79 /* GarlicWebviewUnityWrapper.swift in Sources */,
+				75D626DC22B9F96800F56A8F /* GarlicWebviewWrapper.mm in Sources */,
+				7569E5E722BA002C0087A7A6 /* GarlicWebviewUnityWrapper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		7533A45F22B9F04900F75B79 /* Debug */ = {
+		75D626D022B9F8C200F56A8F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -236,7 +236,7 @@
 			};
 			name = Debug;
 		};
-		7533A46022B9F04900F75B79 /* Release */ = {
+		75D626D122B9F8C200F56A8F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -294,9 +294,10 @@
 			};
 			name = Release;
 		};
-		7533A46222B9F04900F75B79 /* Debug */ = {
+		75D626D322B9F8C200F56A8F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -306,8 +307,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/GarlicWebviewUnityBridge",
-					"$(PROJECT_DIR)/Frameworks",
+					"$(PROJECT_DIR)/GarlicWebviewUnityBridge/Frameworks",
 				);
 				INFOPLIST_FILE = GarlicWebviewUnityBridge/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -319,15 +319,17 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.teamtapas.plugins.GarlicWebviewUnityBridge;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "GarlicWebviewUnityBridge-Bridging-Header.h";
+				SWIFT_COMPILATION_MODE = singlefile;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		7533A46322B9F04900F75B79 /* Release */ = {
+		75D626D422B9F8C200F56A8F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -337,8 +339,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/GarlicWebviewUnityBridge",
-					"$(PROJECT_DIR)/Frameworks",
+					"$(PROJECT_DIR)/GarlicWebviewUnityBridge/Frameworks",
 				);
 				INFOPLIST_FILE = GarlicWebviewUnityBridge/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -350,7 +351,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.teamtapas.plugins.GarlicWebviewUnityBridge;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "GarlicWebviewUnityBridge-Bridging-Header.h";
+				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -359,25 +360,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7533A45322B9F04900F75B79 /* Build configuration list for PBXProject "GarlicWebviewUnityBridge" */ = {
+		75D626C422B9F8C200F56A8F /* Build configuration list for PBXProject "GarlicWebviewUnityBridge" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7533A45F22B9F04900F75B79 /* Debug */,
-				7533A46022B9F04900F75B79 /* Release */,
+				75D626D022B9F8C200F56A8F /* Debug */,
+				75D626D122B9F8C200F56A8F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7533A46122B9F04900F75B79 /* Build configuration list for PBXNativeTarget "GarlicWebviewUnityBridge" */ = {
+		75D626D222B9F8C200F56A8F /* Build configuration list for PBXNativeTarget "GarlicWebviewUnityBridge" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7533A46222B9F04900F75B79 /* Debug */,
-				7533A46322B9F04900F75B79 /* Release */,
+				75D626D322B9F8C200F56A8F /* Debug */,
+				75D626D422B9F8C200F56A8F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 7533A45022B9F04900F75B79 /* Project object */;
+	rootObject = 75D626C122B9F8C200F56A8F /* Project object */;
 }

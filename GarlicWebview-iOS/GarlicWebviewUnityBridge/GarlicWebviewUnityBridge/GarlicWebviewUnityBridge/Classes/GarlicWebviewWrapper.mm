@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "GarlicWebview-Bridging-Header.h"
+#import "GarlicWebviewUnityBridge-Bridging-Header.h"
 #import "GarlicWebviewWrapper.h"
 
 #pragma mark - String Helpers

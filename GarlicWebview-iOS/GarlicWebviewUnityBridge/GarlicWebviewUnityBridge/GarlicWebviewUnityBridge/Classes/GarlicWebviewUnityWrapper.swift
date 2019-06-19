@@ -10,8 +10,6 @@ import Foundation
 import GarlicWebview
 import UIKit
 
-extern void UnitySendMessage(const char *, const char *, const char *);
-
 @objc public class GarlicWebviewUnityWrapper : NSObject, GarlicWebviewProtocol {
     @objc public func Initialize(parentUIView:UIViewController) {
         GarlicWebviewController.shared.Initialize(parentUIView: parentUIView.view!, garlicDelegate: self)

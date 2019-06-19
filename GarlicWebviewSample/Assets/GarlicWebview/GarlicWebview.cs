@@ -113,11 +113,11 @@ namespace Garlic.Plugins.Webview
 			(impl as GarlicWebviewiOSImpl).__fromnative_onPageFinished (url);
 		}
 
-		void __fromnative_onShow()
+		void __fromnative_onShow(string empty_msg)
 		{
 			(impl as GarlicWebviewiOSImpl).__fromnative_onShow ();
 		}
-		void __fromnative_onClose()
+		void __fromnative_onClose(string empty_msg)
 		{
 			(impl as GarlicWebviewiOSImpl).__fromnative_onClose ();
 		}
