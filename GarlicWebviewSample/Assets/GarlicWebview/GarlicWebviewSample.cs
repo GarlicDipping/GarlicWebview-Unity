@@ -18,6 +18,26 @@ namespace Garlic.Plugins.Webview
 
 		public void OnClickShowWebview()
 		{
+#if UNITY_ANDROID
+			OnClickShowWebviewAndroid();
+#elif UNITY_IOS
+			OnClickShowWebviewiOS();
+#else
+			Debug.LogError("Unsupported Platform!");
+#endif
+		}
+
+		private void OnClickShowWebviewAndroid()
+		{
+			int marginPx = GarlicAndroidUtils.dpToPx(30);
+			GarlicWebview.Instance.SetMargins(marginPx, marginPx, marginPx, marginPx);
+			GarlicWebview.Instance.SetFixedRatio(16, 9);
+			GarlicWebview.Instance.ShowWebview(urlText.text);
+		}
+
+		private void OnClickShowWebviewiOS()
+		{
+			GarlicWebview.Instance.SetFixedRatio(16, 9);
 			GarlicWebview.Instance.ShowWebview(urlText.text);
 		}
 
