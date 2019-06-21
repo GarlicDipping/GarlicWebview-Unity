@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Garlic.Plugins.Webview
+namespace Garlic.Plugins.Webview.Impl
 {
 #if UNITY_IOS
 	internal class GarlicWebviewiOSImpl : IGarlicWebviewImpl
@@ -11,22 +11,37 @@ namespace Garlic.Plugins.Webview
 
 		public void Initialize()
 		{
-			GarlicWebview.Initialize();
+			GarlicWebview.__IOS_Initialize();
+		}
+
+		public void SetMargins(int left, int right, int top, int bottom)
+		{
+			GarlicWebview.__IOS_SetMargins (left, right, top, bottom);
+		}
+
+		public void SetFixedRatio(int width, int height)
+		{
+			GarlicWebview.__IOS_SetFixedRatio (width, height);
+		}
+
+		public void UnsetFixedRatio()
+		{
+			GarlicWebview.__IOS_UnsetFixedRatio ();
 		}
 
 		public void Show(string url)
 		{
-			GarlicWebview.Show(url);
+			GarlicWebview.__IOS_Show(url);
 		}
 
 		public bool IsShowing()
 		{
-			return false;
+			return GarlicWebview.__IOS_IsShowing();
 		}
 
 		public void Close()
 		{
-			GarlicWebview.Close();
+			GarlicWebview.__IOS_Close();
 		}
 
 		public void SetCallbackInterface(IGarlicWebviewCallback callbackInterface)

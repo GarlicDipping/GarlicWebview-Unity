@@ -31,6 +31,10 @@ import UIKit
         GarlicWebviewController.shared.Show(url: url)
     }
     
+    @objc public func IsShowing() -> Bool{
+        return GarlicWebviewController.shared.IsShowing()
+    }
+    
     @objc public func Close() {
         GarlicWebviewController.shared.Close()
     }

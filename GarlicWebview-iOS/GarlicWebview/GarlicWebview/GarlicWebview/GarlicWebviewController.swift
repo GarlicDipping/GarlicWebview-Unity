@@ -158,6 +158,14 @@ public class GarlicWebviewController: NSObject {
         webView.load(myRequest)
     }
     
+    public func IsShowing() -> Bool{
+        if(webView == nil) {
+            print("WebView NOT initialized!")
+            return false
+        }
+        return !webView.isHidden
+    }
+    
     public func Close() {
         if(webView == nil) {
             print("Close() / WebView NOT initialized!")

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Runtime.InteropServices;
+using Garlic.Plugins.Webview.Impl;
 
 namespace Garlic.Plugins.Webview
 {
@@ -78,7 +79,7 @@ namespace Garlic.Plugins.Webview
 			}
 		}
 
-		public void ShowWebview(string url)
+		public void Show(string url)
 		{
 			if(impl != null)
 			{
@@ -86,7 +87,7 @@ namespace Garlic.Plugins.Webview
 			}
 		}
 
-		public bool IsShowingWebview()
+		public bool IsShowing()
 		{
 			if (impl != null)
 			{
@@ -95,7 +96,7 @@ namespace Garlic.Plugins.Webview
 			return false;
 		}
 
-		public void CloseWebview()
+		public void Close()
 		{
 			if(impl != null)
 			{
@@ -111,16 +112,28 @@ namespace Garlic.Plugins.Webview
 		#if UNITY_IOS
 
 		[DllImport("__Internal")]
-		internal static extern void Initialize();
+		internal static extern void __IOS_Initialize();
 
 		[DllImport("__Internal")]
-		internal static extern void Show(string url);
+		internal static extern void __IOS_SetMargins(int left, int right, int top, int bottom);
 
 		[DllImport("__Internal")]
-		internal static extern void Close();
+		internal static extern void __IOS_SetFixedRatio(int width, int height);
 
 		[DllImport("__Internal")]
-		internal static extern void Dispose();
+		internal static extern void __IOS_UnsetFixedRatio();
+
+		[DllImport("__Internal")]
+		internal static extern void __IOS_Show(string url);
+
+		[DllImport("__Internal")]
+		internal static extern bool __IOS_IsShowing();
+
+		[DllImport("__Internal")]
+		internal static extern void __IOS_Close();
+
+		[DllImport("__Internal")]
+		internal static extern void __IOS_Dispose();
 
 		#region Callback from native
 

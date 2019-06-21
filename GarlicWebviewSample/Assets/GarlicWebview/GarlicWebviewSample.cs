@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Garlic.Plugins.Webview.Utils;
 
 namespace Garlic.Plugins.Webview
 {
@@ -18,27 +19,10 @@ namespace Garlic.Plugins.Webview
 
 		public void OnClickShowWebview()
 		{
-#if UNITY_ANDROID
-			OnClickShowWebviewAndroid();
-#elif UNITY_IOS
-			OnClickShowWebviewiOS();
-#else
-			Debug.LogError("Unsupported Platform!");
-#endif
-		}
-
-		private void OnClickShowWebviewAndroid()
-		{
-			int marginPx = GarlicAndroidUtils.dpToPx(30);
+			int marginPx = (int)GarlicUtils.DPToPx (30f);
 			GarlicWebview.Instance.SetMargins(marginPx, marginPx, marginPx, marginPx);
 			GarlicWebview.Instance.SetFixedRatio(16, 9);
-			GarlicWebview.Instance.ShowWebview(urlText.text);
-		}
-
-		private void OnClickShowWebviewiOS()
-		{
-			GarlicWebview.Instance.SetFixedRatio(16, 9);
-			GarlicWebview.Instance.ShowWebview(urlText.text);
+			GarlicWebview.Instance.Show(urlText.text);
 		}
 
 		private class GarlicWebviewCallbackReceiver : IGarlicWebviewCallback

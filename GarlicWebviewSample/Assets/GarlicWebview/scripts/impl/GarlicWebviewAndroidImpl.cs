@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Garlic.Plugins.Webview
+namespace Garlic.Plugins.Webview.Impl
 {
 #if UNITY_ANDROID 
 	internal class GarlicWebviewAndroidImpl : IGarlicWebviewImpl

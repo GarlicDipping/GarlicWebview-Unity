@@ -42,45 +42,42 @@ static GarlicWebviewUnityWrapper *_webviewInstance = nil;
 
 extern "C" {
     
-    void Initialize()
+    void __IOS_Initialize()
     {
         UIViewController *rootViewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
         [[GarlicWebviewWrapper webviewInstance] InitializeWithParentUIView:(rootViewController)];
     }
     
-    void SetMargins(int left, int right, int top, int bottom) {
+    void __IOS_SetMargins(int left, int right, int top, int bottom) {
         [[GarlicWebviewWrapper webviewInstance] SetMarginsWithLeft:((NSInteger)left) right:((NSInteger)right) top:((NSInteger)top) bottom:((NSInteger)bottom)];
     }
     
-    void SetFixedRatio(int width, int height) {
+    void __IOS_SetFixedRatio(int width, int height) {
         [[GarlicWebviewWrapper webviewInstance] SetFixedRatioWithWidth:((NSInteger)width) height:((NSInteger)height)];
     }
     
-    void UnsetFixedRatio() {
+    void __IOS_UnsetFixedRatio() {
         [[GarlicWebviewWrapper webviewInstance] UnsetFixedRatio];
     }
     
-    void Show(const char* url)
+    void __IOS_Show(const char* url)
     {
         NSString * _url = NSStringFromCString(url);
         [[GarlicWebviewWrapper webviewInstance] ShowWithUrl:(_url)];
     }
     
-    void Close()
+    void __IOS_Close()
     {
         [[GarlicWebviewWrapper webviewInstance] Close];
     }
     
-    void Dispose()
+    void __IOS_Dispose()
     {
         [[GarlicWebviewWrapper webviewInstance] Dispose];
     }
     
-    static float PointToPx(float pt) {
-        return [UIScreen mainScreen].scale * pt;
-    }
-    
-    static float PxToPoint(float px) {
-        return px / [UIScreen mainScreen].scale;
+    bool __IOS_IsShowing()
+    {
+        return [[GarlicWebviewWrapper webviewInstance] IsShowing];
     }
 }
