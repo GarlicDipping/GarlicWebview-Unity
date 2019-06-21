@@ -75,4 +75,12 @@ extern "C" {
     {
         [[GarlicWebviewWrapper webviewInstance] Dispose];
     }
+    
+    static float PointToPx(float pt) {
+        return [UIScreen mainScreen].scale * pt;
+    }
+    
+    static float PxToPoint(float px) {
+        return px / [UIScreen mainScreen].scale;
+    }
 }
