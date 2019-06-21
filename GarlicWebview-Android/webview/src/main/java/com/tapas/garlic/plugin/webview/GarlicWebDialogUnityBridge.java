@@ -43,7 +43,7 @@ public class GarlicWebDialogUnityBridge
         options.setFixedRatio(width, height);
     }
 
-    public static void UnSetFixedRatio() {
+    public static void UnsetFixedRatio() {
         options.unsetFixedRatio();
     }
 

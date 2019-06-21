@@ -11,6 +11,7 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.EditText;
 
+import com.tapas.garlic.plugin.webview.GarlicUtils;
 import com.tapas.garlic.plugin.webview.GarlicWebDialogCallback;
 import com.tapas.garlic.plugin.webview.GarlicWebDialogFragment;
 import com.tapas.garlic.plugin.webview.GarlicWebDialogUnityBridge;
@@ -62,15 +63,10 @@ public class MainActivity extends AppCompatActivity {
                     Log.d(TAG, "Webview onClose");
                 }
             });
-            int px = dpToPx(getApplicationContext(), 30);
+            int px = GarlicUtils.dpToPx(MainActivity.this, 30);
             GarlicWebDialogUnityBridge.SetMargins(px, px, px, px);
             GarlicWebDialogUnityBridge.SetFixedRatio(16, 9);
             GarlicWebDialogUnityBridge.Show(MainActivity.this, url);
         }
     };
-
-    int dpToPx(Context context, float dp) {
-        DisplayMetrics dm = context.getResources().getDisplayMetrics();
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, dm);
-    }
 }
