@@ -8,6 +8,7 @@ public class GarlicWebDialogUnityBridge
 {
     private static String TAG = "GarlicWebDialogUnityBridge";
     private static GarlicWebDialogCallback callback = null;
+    private static GarlicWebDialogOptions options = new GarlicWebDialogOptions();
 
     public static GarlicWebDialogCallback GetCallbackHandler() {
         return callback;
@@ -30,8 +31,20 @@ public class GarlicWebDialogUnityBridge
             Log.w(GarlicWebDialogUnityBridge.TAG, "GarlicWebDialog not initialized...");
             return false;
         }
-        GarlicWebDialogFragment.ShowDialog(parentActivity, url);
+        GarlicWebDialogFragment.ShowDialog(parentActivity, url, options);
         return true;
+    }
+
+    public static void SetMargins(int left, int right, int top ,int bottom) {
+        options.setMargins(new GarlicMargins(left, right, top, bottom));
+    }
+
+    public static void SetFixedRatio(int width, int height) {
+        options.setFixedRatio(width, height);
+    }
+
+    public static void UnSetFixedRatio() {
+        options.unsetFixedRatio();
     }
 
     public static boolean IsShowing(Activity parentActivity) {

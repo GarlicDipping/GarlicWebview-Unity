@@ -1,10 +1,13 @@
 package com.tapas.garlic.plugin.test;
 
+import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.EditText;
 
@@ -35,23 +38,18 @@ public class MainActivity extends AppCompatActivity {
             String url = editText_url.getText().toString();
             GarlicWebDialogUnityBridge.Initialize(new GarlicWebDialogCallback() {
                 @Override
-                public void onReceiverdError(int errorCode, String description, String failingUrl) {
-                    Log.e(TAG, "Webview Error[" + errorCode + "] : " + description);
+                public void onReceivedError(String message) {
+                    Log.e(TAG, "Webview Error[" + message + "]");
                 }
 
                 @Override
                 public void onPageStarted(String url) {
-                    Log.d(TAG, "Webview onPageStarted[" + url + "] : ");
+                    Log.d(TAG, "Webview onPageStarted[" + url + "]");
                 }
 
                 @Override
                 public void onPageFinished(String url) {
-                    Log.d(TAG, "Webview onPageFinished[" + url + "] : ");
-                }
-
-                @Override
-                public void onLoadResource(String url) {
-                    Log.d(TAG, "Webview onLoadResource[" + url + "] : ");
+                    Log.d(TAG, "Webview onPageFinished[" + url + "]");
                 }
 
                 @Override
@@ -64,7 +62,15 @@ public class MainActivity extends AppCompatActivity {
                     Log.d(TAG, "Webview onClose");
                 }
             });
+            int px = dpToPx(getApplicationContext(), 30);
+            GarlicWebDialogUnityBridge.SetMargins(px, px, px, px);
+            GarlicWebDialogUnityBridge.SetFixedRatio(16, 9);
             GarlicWebDialogUnityBridge.Show(MainActivity.this, url);
         }
     };
+
+    int dpToPx(Context context, float dp) {
+        DisplayMetrics dm = context.getResources().getDisplayMetrics();
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, dm);
+    }
 }

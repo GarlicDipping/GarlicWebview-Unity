@@ -1,21 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <WebView
         android:id="@+id/webview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="30dp" />
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </WebView>
 
     <Button
         android:id="@+id/webview_exit"
-        android:drawableLeft="@drawable/exit_webview"
-        android:background="@null"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_gravity="top|end"/>
+        android:background="@null"
+        android:drawableLeft="@drawable/exit_webview"
+        android:drawableStart="@drawable/exit_webview"
+        app:layout_constraintBottom_toTopOf="@+id/webview"
+        app:layout_constraintEnd_toEndOf="@+id/webview" />
 
-</FrameLayout>
+</android.support.constraint.ConstraintLayout>

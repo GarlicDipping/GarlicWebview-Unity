@@ -23,6 +23,8 @@ import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
+import android.support.constraint.ConstraintSet;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -44,9 +46,10 @@ public class GarlicWebDialogFragment extends DialogFragment {
     public static final String TAG = "WebDialogFragment";
 
     private static final String URL = "URL";
-    private FrameLayout layout;
+    private ConstraintLayout layout;
     private WebView mWebView;
     private Button mWebViewClose;
+    private GarlicWebDialogOptions options;
 
     /**
      * Create a new WebDialogFragment to show a particular web page.
@@ -54,7 +57,7 @@ public class GarlicWebDialogFragment extends DialogFragment {
      * @param url The URL of the content to show.
      */
 
-    public static GarlicWebDialogFragment ShowDialog(final Activity activity, String url) {
+    public static GarlicWebDialogFragment ShowDialog(final Activity activity, String url, GarlicWebDialogOptions options) {
         FragmentTransaction ft = activity.getFragmentManager().beginTransaction();
         //이미 다이얼로그가 보여지고 있었다면 Destroy & Re-Show
         Fragment prev = activity.getFragmentManager().findFragmentByTag(TAG);
@@ -64,6 +67,7 @@ public class GarlicWebDialogFragment extends DialogFragment {
 
         //Create dialog frag and show it
         final GarlicWebDialogFragment f = new GarlicWebDialogFragment();
+        f.setOptions(options);
         Bundle args = new Bundle();
         args.putString(URL, url);
         f.setArguments(args);
@@ -83,6 +87,10 @@ public class GarlicWebDialogFragment extends DialogFragment {
         }
     }
 
+    private void setOptions(GarlicWebDialogOptions options) {
+        this.options = options;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,6 +106,24 @@ public class GarlicWebDialogFragment extends DialogFragment {
 
         layout = rootView.findViewById(R.id.root);
         mWebView = rootView.findViewById(R.id.webview); //new WebView(activity);
+        if(savedInstanceState != null && options == null) {
+            options = RestoreOptions(savedInstanceState);
+        }
+        GarlicMargins optionMargins = options.getMargins();
+
+        ConstraintSet constraintSet = new ConstraintSet();
+        constraintSet.clone(layout);
+        constraintSet.setMargin(R.id.webview, ConstraintSet.START, optionMargins.left);
+        constraintSet.setMargin(R.id.webview, ConstraintSet.END, optionMargins.right);
+        constraintSet.setMargin(R.id.webview, ConstraintSet.TOP, optionMargins.top);
+        constraintSet.setMargin(R.id.webview, ConstraintSet.BOTTOM, optionMargins.bottom);
+        if(options.shouldUseFixedRatio()) {
+            constraintSet.setDimensionRatio(R.id.webview, options.getRatioString());
+        }
+        constraintSet.applyTo(layout);
+        layout.invalidate();
+
+        //mWebView.setLayoutParams(layoutParams);
         mWebViewClose = rootView.findViewById(R.id.webview_exit);
         mWebViewClose.setOnClickListener(onClickWebViewExit);
 
@@ -146,10 +172,40 @@ public class GarlicWebDialogFragment extends DialogFragment {
         return rootView;
     }
 
+    //Need to keep GarlicWebDialogOptions instance on screen rotation.
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("marginLeft", options.getMargins().left);
+        outState.putInt("marginRight", options.getMargins().right);
+        outState.putInt("marginTop", options.getMargins().top);
+        outState.putInt("marginBottom", options.getMargins().bottom);
+        outState.putBoolean("useFixedRatio", options.shouldUseFixedRatio());
+        outState.putInt("ratioWidth", options.getRatioWidth());
+        outState.putInt("ratioHeight", options.getRatioHeight());
+    }
+
+    private GarlicWebDialogOptions RestoreOptions(Bundle savedInstanceState) {
+        int marginLeft = savedInstanceState.getInt("marginLeft");
+        int marginRight = savedInstanceState.getInt("marginRight");
+        int marginTop = savedInstanceState.getInt("marginTop");
+        int marginBottom = savedInstanceState.getInt("marginBottom");
+        boolean useFixedRatio = savedInstanceState.getBoolean("useFixedRatio");
+        int ratioWidth = savedInstanceState.getInt("ratioWidth");
+        int ratioHeight = savedInstanceState.getInt("ratioHeight");
+        GarlicWebDialogOptions options = new GarlicWebDialogOptions();
+        options.setMargins(new GarlicMargins(marginLeft, marginRight, marginTop, marginBottom));
+        if(useFixedRatio) {
+            options.setFixedRatio(ratioWidth, ratioHeight);
+        }
+        return options;
+    }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         if (mWebView != null) {
+            options = null;
             mWebView.stopLoading();
             mWebView.destroy();
             mWebView = null;
