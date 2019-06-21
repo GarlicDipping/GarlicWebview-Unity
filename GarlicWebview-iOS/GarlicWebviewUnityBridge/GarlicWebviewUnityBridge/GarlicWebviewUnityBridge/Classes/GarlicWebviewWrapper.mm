@@ -41,16 +41,23 @@ static GarlicWebviewUnityWrapper *_webviewInstance = nil;
 #pragma mark - C interface
 
 extern "C" {
-    /**
-     *  Starts Swifter shared instance and loads the required API keys.
-     *
-     *  @param consumerKey      (Required) Twitter App Consumer Key (API Key).
-     *  @param consumerSecret   (Required) Twitter App Consumer Secret (API Secret).
-     */
+    
     void Initialize()
     {
         UIViewController *rootViewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
-        [[GarlicWebviewWrapper webviewInstance] InitializeWithParentUIView:(rootViewController)]; //InitializeWithConsumerKey:(_consumerKey) consumerSecret:(_consumerSecret) appOnly:(false)];
+        [[GarlicWebviewWrapper webviewInstance] InitializeWithParentUIView:(rootViewController)];
+    }
+    
+    void SetMargins(int left, int right, int top, int bottom) {
+        [[GarlicWebviewWrapper webviewInstance] SetMarginsWithLeft:((NSInteger)left) right:((NSInteger)right) top:((NSInteger)top) bottom:((NSInteger)bottom)];
+    }
+    
+    void SetFixedRatio(int width, int height) {
+        [[GarlicWebviewWrapper webviewInstance] SetFixedRatioWithWidth:((NSInteger)width) height:((NSInteger)height)];
+    }
+    
+    void UnsetFixedRatio() {
+        [[GarlicWebviewWrapper webviewInstance] UnsetFixedRatio];
     }
     
     void Show(const char* url)

@@ -15,6 +15,18 @@ import UIKit
         GarlicWebviewController.shared.Initialize(parentUIView: parentUIView.view!, garlicDelegate: self)
     }
     
+    @objc public func SetMargins(left: Int, right: Int, top: Int, bottom: Int) {
+        GarlicWebviewController.shared.SetMargins(left: CGFloat(left), right: CGFloat(right), top: CGFloat(top), bottom: CGFloat(bottom))
+    }
+    
+    @objc public func SetFixedRatio(width: Int, height: Int) {
+        GarlicWebviewController.shared.SetFixedRatio(width: width, height: height)
+    }
+    
+    @objc public func UnsetFixedRatio() {
+        GarlicWebviewController.shared.UnsetFixedRatio()
+    }
+    
     @objc public func Show(url: String) {
         GarlicWebviewController.shared.Show(url: url)
     }

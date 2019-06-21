@@ -47,7 +47,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func onClick(_ sender: UIButton) {
-        GarlicWebviewController.shared.Show(url: "https://www.google.com")
+        let marginPx = GarlicUtils.PointToPx(pt: 30)
+        GarlicWebviewController.shared.SetFixedRatio(width: 16, height: 9)
+        GarlicWebviewController.shared.SetMargins(left: marginPx, right: marginPx, top: marginPx, bottom: marginPx)
+        GarlicWebviewController.shared.Show(url: "https://www.teamtapas.com")
     }
 }
 

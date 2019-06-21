@@ -19,16 +19,76 @@ public protocol GarlicWebviewProtocol: class {
     @objc func onClose()
 }
 
+class GarlicWebviewOptions {
+    public var marginLeft : CGFloat
+    public var marginRight : CGFloat
+    public var marginTop : CGFloat
+    public var marginBottom : CGFloat
+    public var useFixedRatio : Bool
+    public var ratioWidth : Int
+    public var ratioHeight : Int
+    
+    public init(marginLeft: CGFloat, marginRight: CGFloat, marginTop: CGFloat, marginBottom: CGFloat) {
+        self.marginLeft = marginLeft;
+        self.marginRight = marginRight;
+        self.marginTop = marginTop;
+        self.marginBottom = marginBottom;
+        self.useFixedRatio = false;
+        self.ratioWidth = 0
+        self.ratioHeight = 0
+    }
+    public init() {
+        self.marginLeft = 0;
+        self.marginRight = 0;
+        self.marginTop = 0;
+        self.marginBottom = 0;
+        self.useFixedRatio = false;
+        self.ratioWidth = 0
+        self.ratioHeight = 0
+    }
+    
+    public func SetMargins(marginLeft: CGFloat, marginRight: CGFloat, marginTop: CGFloat, marginBottom: CGFloat) {
+        self.marginLeft = marginLeft;
+        self.marginRight = marginRight;
+        self.marginTop = marginTop;
+        self.marginBottom = marginBottom;
+    }
+    
+    public func SetFixedRatio(ratioWidth: Int, ratioHeight: Int) {
+        self.useFixedRatio = true
+        self.ratioWidth = ratioWidth
+        self.ratioHeight = ratioHeight
+    }
+    
+    public func UnsetFixedRatio() {
+        self.useFixedRatio = false
+        self.ratioWidth = 0
+        self.ratioHeight = 0
+    }
+}
+
 @objc
 public class GarlicWebviewController: NSObject {
     public static let shared = GarlicWebviewController()
-    static let DEFAULT_MARGIN = CGFloat(30.0)
-    static let CLOSE_BUTTON_SIZE = CGFloat(50.0)
+    //Using pt over px for convenience.
+    static let DEFAULT_MARGIN_PT = CGFloat(30)
+    static let CLOSE_BUTTON_SIZE_PT = CGFloat(50)
     
     var garlicDelegate: GarlicWebviewProtocol?
     var webViewDelegate: GarlicWebviewDelegate!
     var webView: WKWebView!
     var closeButton: UIButton!
+    let webviewOptions: GarlicWebviewOptions!
+    
+    override init() {
+        self.webviewOptions = GarlicWebviewOptions()
+        super.init()
+        let defaultMarginPx = GarlicUtils.PointToPx(pt: GarlicWebviewController.DEFAULT_MARGIN_PT)
+        self.webviewOptions.marginLeft = defaultMarginPx
+        self.webviewOptions.marginRight = defaultMarginPx
+        self.webviewOptions.marginTop = defaultMarginPx
+        self.webviewOptions.marginBottom = defaultMarginPx
+    }
     
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -47,30 +107,26 @@ public class GarlicWebviewController: NSObject {
         let webConfiguration = WKWebViewConfiguration()
         self.garlicDelegate = garlicDelegate
         webView = WKWebView(frame: CGRect.zero, configuration: webConfiguration)
-        //webView = WKWebView(frame: parentUIView.frame, configuration: webConfiguration)
         webViewDelegate = GarlicWebviewDelegate(parent: self)
         webView.uiDelegate = webViewDelegate
         webView.navigationDelegate = webViewDelegate
         webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         webView.isHidden = true
-        //webView.translatesAutoresizingMaskIntoConstraints = false
         parentUIView.addSubview(webView)
         
         let bundle = Bundle(for: type(of: self))
-        let buttonSize = GarlicWebviewController.CLOSE_BUTTON_SIZE
+        let buttonSize = GarlicWebviewController.CLOSE_BUTTON_SIZE_PT
         let buttonImage = UIImage(named: "exit_webview", in: bundle, compatibleWith: nil) as UIImage?
         closeButton = UIButton(type: UIButton.ButtonType.custom) as UIButton
         closeButton.frame = CGRect.init(x: webView.frame.maxX - buttonSize / 2,
             y: webView.frame.minY - buttonSize / 2,
             width: buttonSize,
             height: buttonSize)
-        //closeButton = UIButton(frame: CGRect(x: webView.frame.maxX, y: webView.frame.minY - buttonSize, width: buttonSize, height: buttonSize))
         closeButton.contentVerticalAlignment = UIControl.ContentVerticalAlignment.fill
         closeButton.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.fill
         closeButton.setImage(buttonImage, for: .normal)
         closeButton.addTarget(self, action: #selector(onClickClose), for: .touchUpInside)
         closeButton.isHidden = true
-        //closeButton.translatesAutoresizingMaskIntoConstraints = false
         parentUIView.addSubview(closeButton)
     }
     
@@ -90,6 +146,7 @@ public class GarlicWebviewController: NSObject {
             print("WebView NOT initialized!")
             return
         }
+        
         self.RefreshLayout()
         webView.isHidden = false
         closeButton.isHidden = false
@@ -129,45 +186,67 @@ public class GarlicWebviewController: NSObject {
         garlicDelegate = nil
     }
     
-    public func SetMargins(parentUIView: UIView, left: CGFloat, top: CGFloat, right: CGFloat, bottom: CGFloat) {
-        if (webView == nil) {
-            return
-        }
-        
-        var frame = webView.frame
-        let screen = self.GetSafeArea(parentUIView: parentUIView)//parentUIView.bounds
-        let scale = 1.0 / self.GetScale(parentUIView: parentUIView)
-        frame = GetMarginedFrame(originalFrame: frame, safeAreaBound: screen, scale: scale, left: left, top: top, right: right, bottom: bottom)
-        webView.frame = frame
+    public func SetFixedRatio(width: Int, height: Int) {
+        webviewOptions.useFixedRatio = true
+        webviewOptions.ratioWidth = width
+        webviewOptions.ratioHeight = height
+    }
+    
+    public func SetMargins(left: CGFloat, right: CGFloat, top: CGFloat, bottom: CGFloat) {
+        webviewOptions.marginLeft = left
+        webviewOptions.marginRight = right
+        webviewOptions.marginTop = top
+        webviewOptions.marginBottom = bottom
+    }
+    
+    public func UnsetFixedRatio() {
+        webviewOptions.useFixedRatio = false
+        webviewOptions.ratioWidth = 0
+        webviewOptions.ratioHeight = 0
     }
     
     private func RefreshLayout() {
-        webView.frame = GetDefaultMarginedFrame(parentUIView: webView.superview!)
-        let buttonSize = GarlicWebviewController.CLOSE_BUTTON_SIZE
+        let parentUIView = webView.superview!
+        let originalFrame = parentUIView.frame
+        let safeArea = self.GetSafeArea(parentUIView: parentUIView)
+        
+        var marginedFrame =  GetMarginedFrame(originalFrame: originalFrame, safeAreaBound: safeArea,
+                                          left: GarlicUtils.PxToPoint(px: webviewOptions.marginLeft),                                          
+                                          right: GarlicUtils.PxToPoint(px: webviewOptions.marginRight),
+                                          top: GarlicUtils.PxToPoint(px: webviewOptions.marginTop),
+                                          bottom: GarlicUtils.PxToPoint(px: webviewOptions.marginBottom))
+        if(webviewOptions.useFixedRatio) {
+            let ratioRate = CGFloat(webviewOptions.ratioWidth) / CGFloat(webviewOptions.ratioHeight)
+            if(safeArea.width > safeArea.height) {
+                //landscape mode
+                //keep height, resize width
+                let targetWidth = marginedFrame.height * ratioRate
+                let targetInset = (marginedFrame.width - targetWidth) / 2.0
+                marginedFrame = marginedFrame.insetBy(dx: targetInset, dy: 0)
+            }
+            else {
+                //portrait mode
+                //keep width, resize height
+                let targetHeight = marginedFrame.width / ratioRate
+                let targetInset = (marginedFrame.height - targetHeight) / 2.0
+                marginedFrame = marginedFrame.insetBy(dx: 0, dy: targetInset)
+            }
+        }
+        //print("w / h : " + (marginedFrame.width / marginedFrame.height).description)
+        webView.frame = marginedFrame
+        let buttonSize = GarlicWebviewController.CLOSE_BUTTON_SIZE_PT
         closeButton.frame = CGRect.init(x: webView.frame.maxX - buttonSize / 2,
                                         y: webView.frame.minY - buttonSize / 2,
                                         width: buttonSize,
                                         height: buttonSize)
     }
     
-    private func GetDefaultMarginedFrame(parentUIView: UIView) -> CGRect {
-        let frame = parentUIView.frame
-        let screen = self.GetSafeArea(parentUIView: parentUIView)//parentUIView.bounds
-        let scale = 1.0 / self.GetScale(parentUIView: parentUIView)
-        return GetMarginedFrame(originalFrame: frame, safeAreaBound: screen, scale: scale,
-                                left: GarlicWebviewController.DEFAULT_MARGIN,
-                                top: GarlicWebviewController.DEFAULT_MARGIN,
-                                right: GarlicWebviewController.DEFAULT_MARGIN,
-                                bottom: GarlicWebviewController.DEFAULT_MARGIN)
-    }
-    
-    private func GetMarginedFrame(originalFrame: CGRect, safeAreaBound: CGRect, scale: CGFloat, left: CGFloat, top: CGFloat, right: CGFloat, bottom: CGFloat) -> CGRect{
-        //let statusBarHeight = UIApplication.shared.statusBarFrame.height
+    private func GetMarginedFrame(originalFrame: CGRect, safeAreaBound: CGRect, left: CGFloat, right: CGFloat, top: CGFloat, bottom: CGFloat) -> CGRect{
         var frame = originalFrame
-        frame.size.width = safeAreaBound.size.width - scale * (left + right)
-        frame.size.height = (safeAreaBound.size.height) - scale * (top + bottom)
-        frame.origin.x = safeAreaBound.origin.x + scale * left
-        frame.origin.y = safeAreaBound.origin.y + scale * top
+        frame.size.width = safeAreaBound.size.width - (left + right)
+        frame.size.height = (safeAreaBound.size.height) - (top + bottom)
+        frame.origin.x = safeAreaBound.origin.x + left
+        frame.origin.y = safeAreaBound.origin.y + top
         return frame
     }
     
@@ -184,15 +263,6 @@ public class GarlicWebviewController: NSObject {
             safeAreaFrame = parentUIView.frame;
         }
         return safeAreaFrame
-    }
-    
-    private func GetScale(parentUIView: UIView) -> CGFloat {
-        //I'm not going to expose SetMargins() method for now, so just going to use iOS point unit for close button.
-        return 1.0
-        /*if #available(iOS 8.0, *) {
-            return UIScreen.main.nativeScale
-        }
-        return parentUIView.contentScaleFactor */
     }
     
     private func ClearCache() {
