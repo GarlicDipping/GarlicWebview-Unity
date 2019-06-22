@@ -1,18 +1,22 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using UnityEditor.Callbacks;
-using UnityEditor.iOS.Xcode;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+
+#if UNITY_IOS
+using UnityEditor.iOS.Xcode;
 using UnityEditor.iOS.Xcode.Extensions;
+#endif
 
 public static class GarlicWebviewUnityBridgePostProcessor {
+#if UNITY_IOS
 	[PostProcessBuild]
 	public static void OnPostProcessBuild(BuildTarget buildTarget, string buildPath) {
-		if(buildTarget == BuildTarget.iOS) {
+        if(buildTarget == BuildTarget.iOS) {
 			// We need to construct our own PBX project path that corrently refers to the Bridging header
 			// var projPath = PBXProject.GetPBXProjectPath(buildPath);
 			var projPath = buildPath + "/Unity-iPhone.xcodeproj/project.pbxproj";
@@ -37,4 +41,5 @@ public static class GarlicWebviewUnityBridgePostProcessor {
 			proj.WriteToFile(projPath);
 		}
 	}
+#endif
 }
