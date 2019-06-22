@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:GarlicWebviewUnityBridge/GarlicWebviewUnityBridge/GarlicWebviewUnityBridge.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:GarlicWebview/GarlicWebview/GarlicWebview.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:GarlicWebviewApp/GarlicWebviewApp/GarlicWebviewApp.xcodeproj">
+   </FileRef>
+</Workspace>

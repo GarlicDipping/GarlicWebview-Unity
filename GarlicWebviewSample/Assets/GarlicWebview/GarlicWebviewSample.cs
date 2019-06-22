@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Garlic.Plugins.Webview.Utils;
 
 namespace Garlic.Plugins.Webview
 {
@@ -18,6 +19,9 @@ namespace Garlic.Plugins.Webview
 
 		public void OnClickShowWebview()
 		{
+			int marginPx = (int)GarlicUtils.DPToPx (30f);
+			GarlicWebview.Instance.SetMargins(marginPx, marginPx, marginPx, marginPx);
+			GarlicWebview.Instance.SetFixedRatio(16, 9);
 			GarlicWebview.Instance.Show(urlText.text);
 		}
 
@@ -43,9 +47,9 @@ namespace Garlic.Plugins.Webview
 				Debug.Log("GarlicWebview: onPageStarted [" + url + "]");
 			}
 
-			public void onReceivedError(int errorCode, string description, string failingUrl)
+			public void onReceivedError(string errorMessage)
 			{
-				Debug.Log("GarlicWebview: onReceiverdError [" + errorCode + "][" + description + "][" + failingUrl + "]");
+				Debug.Log("GarlicWebview: onReceivedError [" + errorMessage + "]");
 			}
 
 			public void onShow()

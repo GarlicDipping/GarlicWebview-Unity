@@ -2,83 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Garlic.Plugins.Webview
+namespace Garlic.Plugins.Webview.Impl
 {
-	public interface IGarlicWebviewCallback
-	{
-		void onReceivedError(string message);
-		void onPageStarted(string url);
-		void onPageFinished(string url);
-		void onLoadResource(string url);
-
-		void onShow();
-		void onClose();
-	}
-
-	public class GarlicWebview
-	{
-		public static GarlicWebview Instance
-		{
-			get
-			{
-				if (instance == null) { instance = new GarlicWebview(); }
-				return instance;
-			}
-		}
-
-		private static GarlicWebview instance;
-		private IGarlicWebviewImpl impl;
-		
-		private GarlicWebview()
-		{
-#if UNITY_ANDROID
-			impl = new GarlicWebviewAndroidImpl();
-#elif UNITY_IOS
-#endif
-		}
-
-		public void SetCallbackInterface(IGarlicWebviewCallback callbackInterface)
-		{
-			impl.SetCallbackInterface(callbackInterface);
-		}
-
-		public void Show(string url)
-		{
-			if(impl != null)
-			{
-				impl.Show(url);
-			}
-		}
-
-		public bool IsShowing()
-		{
-			if (impl != null)
-			{
-				return impl.IsShowing();
-			}
-			return false;
-		}
-
-		public void Close()
-		{
-			if(impl != null)
-			{
-				impl.Close();
-			}
-		}
-	}
-
-	internal interface IGarlicWebviewImpl
-	{
-		void Show(string url);
-		bool IsShowing();
-		void Close();
-		void SetCallbackInterface(IGarlicWebviewCallback callback);
-	}
-
+#if UNITY_ANDROID 
 	internal class GarlicWebviewAndroidImpl : IGarlicWebviewImpl
 	{
-		internal class CallbackBridge : AndroidJavaProxy
+		private class CallbackBridge : AndroidJavaProxy
 		{
 			private IGarlicWebviewCallback callbackInterface;
 			public CallbackBridge(IGarlicWebviewCallback callbackInterface) : base("com.tapas.garlic.plugin.webview.GarlicWebDialogCallback")
@@ -107,12 +36,6 @@ namespace Garlic.Plugins.Webview
 				callbackInterface.onPageFinished(url);
 			}
 
-			public void onLoadResource(string url)
-			{
-				if (callbackInterface == null) { return; }
-				callbackInterface.onLoadResource(url);
-			}
-
 			public void onShow()
 			{
 				if (callbackInterface == null) { return; }
@@ -133,8 +56,30 @@ namespace Garlic.Plugins.Webview
 		{
 			callback = new CallbackBridge(null);
 			pluginClass = new AndroidJavaClass(fullClassName);
-			pluginClass.CallStatic<bool>("Initialize", callback);
 			unityActivity = GetUnityActivity();
+		}
+
+		#region implementation
+
+		public void Initialize()
+		{
+			//Do Nothing
+			pluginClass.CallStatic<bool>("Initialize", callback);
+		}
+
+		public void SetMargins(int left, int right, int top, int bottom)
+		{
+			pluginClass.CallStatic("SetMargins", left, right, top, bottom);
+		}
+
+		public void SetFixedRatio(int width, int height)
+		{
+			pluginClass.CallStatic("SetFixedRatio", width, height);
+		}
+
+		public void UnsetFixedRatio()
+		{
+			pluginClass.CallStatic("UnsetFixedRatio");
 		}
 
 		public void Show(string url)
@@ -157,12 +102,14 @@ namespace Garlic.Plugins.Webview
 			callback.SetCallbackInterface(callbackInterface);
 		}
 
+		#endregion
+
 		private AndroidJavaObject GetUnityActivity()
 		{
 			AndroidJavaClass unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
 			AndroidJavaObject activity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
 			return activity;
-		}
+		}		
 	}
-
+#endif
 }
