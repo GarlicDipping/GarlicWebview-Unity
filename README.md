@@ -1,7 +1,7 @@
 # GarlicWebview
 A simple webview plugin for unity3d engine. 
 
-Currently supports android only. iOS support will be implemented soon.
+Supports both Android and iOS.
 
 ## Android
 
