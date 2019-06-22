@@ -34,35 +34,35 @@ If you want to receive callbacks from webview, implement <code>IGarlicWebviewCal
 <pre><code>
 private class GarlicWebviewCallbackReceiver : IGarlicWebviewCallback
 {
-  public void onClose()
-  {
-    Debug.Log("GarlicWebview: onClose");
-  }
+    public void onClose()
+    {
+        Debug.Log("GarlicWebview: onClose");
+    }
 
-  public void onLoadResource(string url)
-  {
-     Debug.Log("GarlicWebview: onLoadResource [" + url + "]");
-  }
+    public void onLoadResource(string url)
+    {
+        Debug.Log("GarlicWebview: onLoadResource [" + url + "]");
+    }
 
-  public void onPageFinished(string url)
-  {
-    Debug.Log("GarlicWebview: onPageFinished [" + url + "]");
-  }
+    public void onPageFinished(string url)
+    {
+        Debug.Log("GarlicWebview: onPageFinished [" + url + "]");
+    }
 
-  public void onPageStarted(string url)
-  {
-    Debug.Log("GarlicWebview: onPageStarted [" + url + "]");
-  }
+    public void onPageStarted(string url)
+    {
+        Debug.Log("GarlicWebview: onPageStarted [" + url + "]");
+    }
 
-  public void onReceivedError(string errorMessage)
-  {
-    Debug.Log("GarlicWebview: onReceivedError [" + errorMessage + "]");
-  }
+    public void onReceivedError(string errorMessage)
+    {
+        Debug.Log("GarlicWebview: onReceivedError [" + errorMessage + "]");
+    }
 
-  public void onShow()
-  {
-    Debug.Log("GarlicWebview: onShow");
-  }
+    public void onShow()
+    {
+        Debug.Log("GarlicWebview: onShow");
+    }
 }
 </code></pre>
 
