@@ -120,6 +120,3 @@ void Start()
 
 See GarlicWebviewSample project to learn more about this plugin. 
 Tested on Samsung Galaxy s8, sample project built with Unity2017.4.26f1 LTS.
-
-## TODO
-- iOS Support
