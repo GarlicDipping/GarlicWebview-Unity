@@ -5,7 +5,7 @@ Supports both Android and iOS.
 
 ## Install
 
-Download [GarlicWebview-Unity.unitypackage](https://github.com/GarlicDipping/GarlicWebview-Unity/raw/master/GarlicWebview-Unity.unitypackage) file and enjoy!
+Download [GarlicWebview-Unity.unitypackage](https://github.com/GarlicDipping/GarlicWebview-Unity/raw/master/GarlicWebview-Unity.unitypackage) file and import, then enjoy!
 
 ## Android
 
