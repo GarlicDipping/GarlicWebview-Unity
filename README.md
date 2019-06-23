@@ -3,6 +3,10 @@ A simple webview plugin for unity3d engine.
 
 Supports both Android and iOS.
 
+## Install
+
+Download [GarlicWebview-Unity.unitypackage](https://github.com/GarlicDipping/GarlicWebview-Unity/raw/master/GarlicWebview-Unity.unitypackage) file and enjoy!
+
 ## Android
 
 - This plugin uses [DialogFragment](https://developer.android.com/reference/android/app/DialogFragment) to show [Webview](https://developer.android.com/reference/android/webkit/WebView).
