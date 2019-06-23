@@ -39,11 +39,6 @@ private class GarlicWebviewCallbackReceiver : IGarlicWebviewCallback
         Debug.Log("GarlicWebview: onClose");
     }
 
-    public void onLoadResource(string url)
-    {
-        Debug.Log("GarlicWebview: onLoadResource [" + url + "]");
-    }
-
     public void onPageFinished(string url)
     {
         Debug.Log("GarlicWebview: onPageFinished [" + url + "]");
