@@ -70,7 +70,7 @@ var callbackReceiver = new GarlicWebviewCallbackReceiver();
 GarlicWebview.Instance.SetCallbackInterface(callbackReceiver);
 </code></pre>
 
-### Setups before showing webview
+### Webview Options
 
 Functions below are used to set options for webview.
 You should call those functions <strong>after</strong> initialize webview, and <strong>before</strong> showing webview.
