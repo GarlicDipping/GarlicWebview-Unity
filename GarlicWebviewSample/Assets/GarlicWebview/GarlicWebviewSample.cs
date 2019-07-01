@@ -21,7 +21,7 @@ namespace Garlic.Plugins.Webview
 		{
 			int marginPx = (int)GarlicUtils.DPToPx (30f);
 			GarlicWebview.Instance.SetMargins(marginPx, marginPx, marginPx, marginPx);
-			GarlicWebview.Instance.SetFixedRatio(16, 9);
+			GarlicWebview.Instance.SetFixedRatio(2, 1);
 			GarlicWebview.Instance.Show(urlText.text);
 		}
 

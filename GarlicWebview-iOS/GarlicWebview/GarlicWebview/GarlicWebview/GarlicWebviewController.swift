@@ -69,7 +69,7 @@ class GarlicWebviewOptions {
 
 @objc
 public class GarlicWebviewController: NSObject {
-    public static let shared = GarlicWebviewController()
+    static let shared = GarlicWebviewController()
     //Using pt over px for convenience.
     static let DEFAULT_MARGIN_PT = CGFloat(30)
     static let CLOSE_BUTTON_SIZE_PT = CGFloat(50)
@@ -94,7 +94,11 @@ public class GarlicWebviewController: NSObject {
         NotificationCenter.default.removeObserver(self)
     }
     
-    public func Initialize(parentUIView: UIView, garlicDelegate: GarlicWebviewProtocol) {
+    @objc public static func GetInstance() -> GarlicWebviewController {
+        return shared
+    }
+    
+    @objc public func Initialize(parentUIView: UIView, garlicDelegate: GarlicWebviewProtocol) {
         if(webView != nil) {
             //print("WebView Already Initialized!")
             return
@@ -141,7 +145,7 @@ public class GarlicWebviewController: NSObject {
         self.Close()
     }
     
-    public func Show(url: String) {
+    @objc public func Show(url: String) {
         if(webView == nil) {
             print("WebView NOT initialized!")
             return
@@ -158,7 +162,7 @@ public class GarlicWebviewController: NSObject {
         webView.load(myRequest)
     }
     
-    public func IsShowing() -> Bool{
+    @objc public func IsShowing() -> Bool{
         if(webView == nil) {
             print("WebView NOT initialized!")
             return false
@@ -166,7 +170,7 @@ public class GarlicWebviewController: NSObject {
         return !webView.isHidden
     }
     
-    public func Close() {
+    @objc public func Close() {
         if(webView == nil) {
             print("Close() / WebView NOT initialized!")
             return
@@ -179,7 +183,7 @@ public class GarlicWebviewController: NSObject {
         ClearCache()
     }
     
-    public func Dispose() {
+    @objc public func Dispose() {
         if(webView == nil) {
             print("Dispose() / WebView NOT initialized!")
             return
@@ -194,20 +198,20 @@ public class GarlicWebviewController: NSObject {
         garlicDelegate = nil
     }
     
-    public func SetFixedRatio(width: Int, height: Int) {
+    @objc public func SetFixedRatio(width: Int, height: Int) {
         webviewOptions.useFixedRatio = true
         webviewOptions.ratioWidth = width
         webviewOptions.ratioHeight = height
     }
     
-    public func SetMargins(left: CGFloat, right: CGFloat, top: CGFloat, bottom: CGFloat) {
+    @objc public func SetMargins(left: CGFloat, right: CGFloat, top: CGFloat, bottom: CGFloat) {
         webviewOptions.marginLeft = left
         webviewOptions.marginRight = right
         webviewOptions.marginTop = top
         webviewOptions.marginBottom = bottom
     }
     
-    public func UnsetFixedRatio() {
+    @objc public func UnsetFixedRatio() {
         webviewOptions.useFixedRatio = false
         webviewOptions.ratioWidth = 0
         webviewOptions.ratioHeight = 0

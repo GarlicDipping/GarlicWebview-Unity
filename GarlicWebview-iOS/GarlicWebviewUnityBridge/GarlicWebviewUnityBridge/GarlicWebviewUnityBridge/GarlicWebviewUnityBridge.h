@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GarlicWebviewUnityProtocol.h"
 
 //! Project version number for GarlicWebviewUnityBridge.
 FOUNDATION_EXPORT double GarlicWebviewUnityBridgeVersionNumber;

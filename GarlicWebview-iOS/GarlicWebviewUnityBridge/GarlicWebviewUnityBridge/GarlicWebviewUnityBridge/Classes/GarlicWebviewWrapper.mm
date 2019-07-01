@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "GarlicWebviewUnityBridge-Bridging-Header.h"
+#import <GarlicWebview/GarlicWebview.h>
 #import "GarlicWebviewWrapper.h"
+#import "GarlicWebviewUnityProtocol.h"
 
 #pragma mark - String Helpers
 
@@ -22,22 +23,6 @@ static NSString * const NSStringFromCString(const char *string)
     }
 }
 
-#pragma mark - Obj C Wrapper
-
-static GarlicWebviewUnityWrapper *_webviewInstance = nil;
-
-@implementation GarlicWebviewWrapper
-
-+ (GarlicWebviewUnityWrapper *)webviewInstance
-{
-    if(_webviewInstance == nil){
-        _webviewInstance = [[GarlicWebviewUnityWrapper alloc] init];
-    }
-    return _webviewInstance;
-}
-
-@end
-
 #pragma mark - C interface
 
 extern "C" {
@@ -45,39 +30,40 @@ extern "C" {
     void __IOS_Initialize()
     {
         UIViewController *rootViewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
-        [[GarlicWebviewWrapper webviewInstance] InitializeWithParentUIView:(rootViewController)];
+        GarlicWebviewUnityProtocol *callback = [[GarlicWebviewUnityProtocol alloc] init];
+        [[GarlicWebviewController GetInstance] InitializeWithParentUIView:[rootViewController view] garlicDelegate:callback];
     }
     
     void __IOS_SetMargins(int left, int right, int top, int bottom) {
-        [[GarlicWebviewWrapper webviewInstance] SetMarginsWithLeft:((NSInteger)left) right:((NSInteger)right) top:((NSInteger)top) bottom:((NSInteger)bottom)];
+        [[GarlicWebviewController GetInstance] SetMarginsWithLeft:left right:right top:top bottom:bottom];
     }
     
     void __IOS_SetFixedRatio(int width, int height) {
-        [[GarlicWebviewWrapper webviewInstance] SetFixedRatioWithWidth:((NSInteger)width) height:((NSInteger)height)];
+        [[GarlicWebviewController GetInstance] SetFixedRatioWithWidth:width height:height];
     }
     
     void __IOS_UnsetFixedRatio() {
-        [[GarlicWebviewWrapper webviewInstance] UnsetFixedRatio];
+        [[GarlicWebviewController GetInstance] UnsetFixedRatio];
     }
     
     void __IOS_Show(const char* url)
     {
         NSString * _url = NSStringFromCString(url);
-        [[GarlicWebviewWrapper webviewInstance] ShowWithUrl:(_url)];
+        [[GarlicWebviewController GetInstance] ShowWithUrl:_url];
     }
     
     void __IOS_Close()
     {
-        [[GarlicWebviewWrapper webviewInstance] Close];
+        [[GarlicWebviewController GetInstance] Close];
     }
     
     void __IOS_Dispose()
     {
-        [[GarlicWebviewWrapper webviewInstance] Dispose];
+        [[GarlicWebviewController GetInstance] Dispose];
     }
     
     bool __IOS_IsShowing()
     {
-        return [[GarlicWebviewWrapper webviewInstance] IsShowing];
+        return [[GarlicWebviewController GetInstance] IsShowing];
     }
 }
