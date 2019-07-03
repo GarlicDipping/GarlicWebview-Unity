@@ -76,6 +76,7 @@ public class GarlicWebviewController: NSObject {
     
     var garlicDelegate: GarlicWebviewProtocol?
     var webViewDelegate: GarlicWebviewDelegate!
+    var dimView: UIView!
     var webView: WKWebView!
     var closeButton: UIButton!
     let webviewOptions: GarlicWebviewOptions!
@@ -107,6 +108,14 @@ public class GarlicWebviewController: NSObject {
                                                selector: #selector(GarlicWebviewController.onRotate),
                                                name: UIDevice.orientationDidChangeNotification,
                                                object: nil)
+        
+        // Add Dim view. Using UIButton so that inputs will be never forwarded to root view controller!
+        dimView = UIButton(frame: UIScreen.main.bounds)
+        dimView.backgroundColor = UIColor(white: 0, alpha: 0.5)
+        dimView.isExclusiveTouch = true
+        dimView.isUserInteractionEnabled = true
+        dimView.isHidden = true
+        parentUIView.addSubview(dimView)
         
         let webConfiguration = WKWebViewConfiguration()
         self.garlicDelegate = garlicDelegate
@@ -152,6 +161,7 @@ public class GarlicWebviewController: NSObject {
         }
         
         self.RefreshLayout()
+        dimView.isHidden = false
         webView.isHidden = false
         closeButton.isHidden = false
         garlicDelegate?.onShow()
@@ -175,8 +185,9 @@ public class GarlicWebviewController: NSObject {
             print("Close() / WebView NOT initialized!")
             return
         }
-        webView.isHidden = true
         closeButton.isHidden = true
+        webView.isHidden = true
+        dimView.isHidden = true;
         garlicDelegate?.onClose()
         webView.stopLoading()
         webView.load(URLRequest(url: URL(string:"about:blank")!))
@@ -192,7 +203,11 @@ public class GarlicWebviewController: NSObject {
         webView.navigationDelegate = nil
         webView.stopLoading()
         webView.removeFromSuperview()
+        closeButton.removeFromSuperview()
+        dimView.removeFromSuperview()
+        
         webView = nil
+        dimView = nil
         closeButton = nil
         webViewDelegate = nil
         garlicDelegate = nil
@@ -218,10 +233,11 @@ public class GarlicWebviewController: NSObject {
     }
     
     private func RefreshLayout() {
+        dimView.frame = UIScreen.main.bounds
+        
         let parentUIView = webView.superview!
         let originalFrame = parentUIView.frame
         let safeArea = self.GetSafeArea(parentUIView: parentUIView)
-        
         var marginedFrame =  GetMarginedFrame(originalFrame: originalFrame, safeAreaBound: safeArea,
                                           left: GarlicUtils.PxToPoint(px: webviewOptions.marginLeft),                                          
                                           right: GarlicUtils.PxToPoint(px: webviewOptions.marginRight),

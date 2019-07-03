@@ -29,7 +29,7 @@ extern "C" {
     
     void __IOS_Initialize()
     {
-        UIViewController *rootViewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
+        UIViewController *rootViewController = UnityGetGLViewController();
         GarlicWebviewUnityProtocol *callback = [[GarlicWebviewUnityProtocol alloc] init];
         [[GarlicWebviewController GetInstance] InitializeWithParentUIView:[rootViewController view] garlicDelegate:callback];
     }

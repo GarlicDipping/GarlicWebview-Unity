@@ -48,9 +48,13 @@ class ViewController: UIViewController {
     
     @IBAction func onClick(_ sender: UIButton) {
         let marginPx = GarlicUtils.PointToPx(pt: 30)
-        GarlicWebviewController.GetInstance().SetFixedRatio(width: 16, height: 9)
+        GarlicWebviewController.GetInstance().SetFixedRatio(width: 2, height: 1)
         GarlicWebviewController.GetInstance().SetMargins(left: marginPx, right: marginPx, top: marginPx, bottom: marginPx)
         GarlicWebviewController.GetInstance().Show(url: "https://www.teamtapas.com")
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("touchesBegan")
     }
 }
 
