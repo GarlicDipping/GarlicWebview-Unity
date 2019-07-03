@@ -43,14 +43,14 @@ class ViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        GarlicWebviewController.shared.Initialize(parentUIView: self.view!, garlicDelegate: TestProtocol())
+        GarlicWebviewController.GetInstance().Initialize(parentUIView: self.view!, garlicDelegate: TestProtocol())
     }
     
     @IBAction func onClick(_ sender: UIButton) {
         let marginPx = GarlicUtils.PointToPx(pt: 30)
-        GarlicWebviewController.shared.SetFixedRatio(width: 16, height: 9)
-        GarlicWebviewController.shared.SetMargins(left: marginPx, right: marginPx, top: marginPx, bottom: marginPx)
-        GarlicWebviewController.shared.Show(url: "https://www.teamtapas.com")
+        GarlicWebviewController.GetInstance().SetFixedRatio(width: 16, height: 9)
+        GarlicWebviewController.GetInstance().SetMargins(left: marginPx, right: marginPx, top: marginPx, bottom: marginPx)
+        GarlicWebviewController.GetInstance().Show(url: "https://www.teamtapas.com")
     }
 }
 

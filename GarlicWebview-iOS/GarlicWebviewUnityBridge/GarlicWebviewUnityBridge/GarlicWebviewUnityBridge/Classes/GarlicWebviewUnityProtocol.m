@@ -17,19 +17,19 @@
 }
 
 - (void)onPageFinishedWithUrl:(NSString * _Nonnull)url {
-    UnitySendMessage("GarlicWebview", "__fromnative_onPageFinished", url)
+    UnitySendMessage("GarlicWebview", "__fromnative_onPageFinished", [url UTF8String]);
 }
 
 - (void)onPageStartedWithUrl:(NSString * _Nonnull)url {
-    UnitySendMessage("GarlicWebview", "__fromnative_onPageStarted", url)
+    UnitySendMessage("GarlicWebview", "__fromnative_onPageStarted", [url UTF8String]);
 }
 
 - (void)onReceivedErrorWithMessage:(NSString * _Nonnull)message {
-    UnitySendMessage("GarlicWebview", "__fromnative_onReceivedError", message);
+    UnitySendMessage("GarlicWebview", "__fromnative_onReceivedError", [message UTF8String]);
 }
 
 - (void)onShow {
-    UnitySendMessage("GarlicWebview", "__fromnative_onShow", "")
+    UnitySendMessage("GarlicWebview", "__fromnative_onShow", "");
 }
 
 @end

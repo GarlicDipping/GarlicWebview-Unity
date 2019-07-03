@@ -9,17 +9,17 @@
 import Foundation
 import UIKit
 
-public class GarlicUtils {
+@objc public class GarlicUtils : NSObject {
     
-    public static func PointToPx(pt: CGFloat) -> CGFloat {
+    @objc public static func PointToPx(pt: CGFloat) -> CGFloat {
         return pt * GetScale()
     }
     
-    public static func PxToPoint(px: CGFloat) -> CGFloat {
+    @objc public static func PxToPoint(px: CGFloat) -> CGFloat {
         return px / GetScale()
     }
     
-    public static func GetScale() -> CGFloat {
+    @objc public static func GetScale() -> CGFloat {
         return UIScreen.main.nativeScale
     }
     

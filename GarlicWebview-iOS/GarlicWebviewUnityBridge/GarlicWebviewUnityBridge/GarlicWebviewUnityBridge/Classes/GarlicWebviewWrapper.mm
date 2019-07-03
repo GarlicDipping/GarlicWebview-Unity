@@ -66,4 +66,16 @@ extern "C" {
     {
         return [[GarlicWebviewController GetInstance] IsShowing];
     }
+    
+    float __IOS_PxToPt(int px)
+    {
+        CGFloat f_px = (CGFloat)px;
+        return [GarlicUtils PxToPointWithPx:f_px];
+    }
+    
+    float __IOS_PtToPx(int pt)
+    {
+        CGFloat f_pt = (CGFloat)pt;
+        return [GarlicUtils PointToPxWithPt:f_pt];
+    }
 }

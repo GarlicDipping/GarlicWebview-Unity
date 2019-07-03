@@ -168,6 +168,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #if __has_warning("-Watimport-in-framework-header")
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
+@import CoreGraphics;
 @import ObjectiveC;
 #endif
 
@@ -186,11 +187,22 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
+@class UIView;
+@protocol GarlicWebviewProtocol;
 
 SWIFT_CLASS("_TtC13GarlicWebview23GarlicWebviewController")
 @interface GarlicWebviewController : NSObject
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
++ (GarlicWebviewController * _Nonnull)GetInstance SWIFT_WARN_UNUSED_RESULT;
+- (void)InitializeWithParentUIView:(UIView * _Nonnull)parentUIView garlicDelegate:(id <GarlicWebviewProtocol> _Nonnull)garlicDelegate;
+- (void)ShowWithUrl:(NSString * _Nonnull)url;
+- (BOOL)IsShowing SWIFT_WARN_UNUSED_RESULT;
+- (void)Close;
+- (void)Dispose;
+- (void)SetFixedRatioWithWidth:(NSInteger)width height:(NSInteger)height;
+- (void)SetMarginsWithLeft:(CGFloat)left right:(CGFloat)right top:(CGFloat)top bottom:(CGFloat)bottom;
+- (void)UnsetFixedRatio;
 @end
 
 
@@ -377,6 +389,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #if __has_warning("-Watimport-in-framework-header")
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
+@import CoreGraphics;
 @import ObjectiveC;
 #endif
 
@@ -395,11 +408,22 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
+@class UIView;
+@protocol GarlicWebviewProtocol;
 
 SWIFT_CLASS("_TtC13GarlicWebview23GarlicWebviewController")
 @interface GarlicWebviewController : NSObject
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
++ (GarlicWebviewController * _Nonnull)GetInstance SWIFT_WARN_UNUSED_RESULT;
+- (void)InitializeWithParentUIView:(UIView * _Nonnull)parentUIView garlicDelegate:(id <GarlicWebviewProtocol> _Nonnull)garlicDelegate;
+- (void)ShowWithUrl:(NSString * _Nonnull)url;
+- (BOOL)IsShowing SWIFT_WARN_UNUSED_RESULT;
+- (void)Close;
+- (void)Dispose;
+- (void)SetFixedRatioWithWidth:(NSInteger)width height:(NSInteger)height;
+- (void)SetMarginsWithLeft:(CGFloat)left right:(CGFloat)right top:(CGFloat)top bottom:(CGFloat)bottom;
+- (void)UnsetFixedRatio;
 @end
 
 
