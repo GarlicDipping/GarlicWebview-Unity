@@ -20,7 +20,9 @@ import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
@@ -40,6 +42,8 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.FrameLayout;
+
+import java.net.URI;
 
 /** A DialogFragment that shows a web view. */
 public class GarlicWebDialogFragment extends DialogFragment {
@@ -153,8 +157,17 @@ public class GarlicWebDialogFragment extends DialogFragment {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url)
             {
-                view.loadUrl(url);
-                return true;
+                boolean openExternal = Uri.parse(url).getBooleanQueryParameter("openExternal", false);
+                if(openExternal) {
+                    // Otherwise, give the default behavior (open in browser)
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                    startActivity(intent);
+                    return true;
+                }
+                else {
+                    view.loadUrl(url);
+                    return false;
+                }
             }
         });
 
