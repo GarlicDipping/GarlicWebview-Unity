@@ -165,6 +165,9 @@ public class GarlicWebDialogFragment extends DialogFragment {
         webSettings.setUseWideViewPort(true);
         webSettings.setJavaScriptEnabled(true);
         webSettings.setDomStorageEnabled(true);
+        //Let webview not use cache
+        mWebView.clearCache(true);
+        webSettings.setAppCacheEnabled(false);
 
         String url = getArguments().getString(URL);
         mWebView.loadUrl(url);
