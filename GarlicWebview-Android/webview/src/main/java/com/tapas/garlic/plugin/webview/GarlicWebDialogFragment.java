@@ -137,17 +137,30 @@ public class GarlicWebDialogFragment extends DialogFragment {
             {
                 mWebView.loadUrl("about:blank");
                 String errorMessage = "Error " + errorCode + ": " + description + " [" + failingUrl + "]";
-                GarlicWebDialogUnityBridge.GetCallbackHandler().onReceivedError(errorMessage);
+                GarlicWebDialogCallback callback = GarlicWebDialogUnityBridge.GetCallbackHandler();
+                if(callback != null)
+                {
+                    callback.onReceivedError(errorMessage);
+                }
             }
 
             @Override
-            public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                GarlicWebDialogUnityBridge.GetCallbackHandler().onPageStarted(url);
+            public void onPageStarted(WebView view, String url, Bitmap favicon)
+            {
+                GarlicWebDialogCallback callback = GarlicWebDialogUnityBridge.GetCallbackHandler();
+                if(callback != null)
+                {
+                    callback.onPageStarted(url);
+                }
             }
 
             @Override
             public void onPageFinished(WebView view, String url) {
-                GarlicWebDialogUnityBridge.GetCallbackHandler().onPageFinished(url);
+                GarlicWebDialogCallback callback = GarlicWebDialogUnityBridge.GetCallbackHandler();
+                if(callback != null)
+                {
+                    callback.onPageFinished(url);
+                }
             }
 
             @Override
