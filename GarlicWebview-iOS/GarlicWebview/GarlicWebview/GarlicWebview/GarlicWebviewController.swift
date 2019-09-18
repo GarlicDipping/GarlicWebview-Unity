@@ -111,7 +111,7 @@ public class GarlicWebviewController: NSObject {
         
         // Add Dim view. Using UIButton so that inputs will be never forwarded to root view controller!
         dimView = UIButton(frame: UIScreen.main.bounds)
-        dimView.backgroundColor = UIColor(white: 0, alpha: 0.5)
+        dimView.backgroundColor = UIColor(white: 0, alpha: 0.75)
         dimView.isExclusiveTouch = true
         dimView.isUserInteractionEnabled = true
         dimView.isHidden = true
