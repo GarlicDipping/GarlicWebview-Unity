@@ -225,8 +225,9 @@ public class GarlicWebDialogFragment extends DialogFragment {
             mWebView.stopLoading();
             mWebView.destroy();
             mWebView = null;
-            if(isRemoving()) {
-                GarlicWebDialogUnityBridge.GetCallbackHandler().onClose();
+            GarlicWebDialogCallback callback = GarlicWebDialogUnityBridge.GetCallbackHandler();
+            if(isRemoving() && callback != null) {
+                callback.onClose();
             }
         }
     }
