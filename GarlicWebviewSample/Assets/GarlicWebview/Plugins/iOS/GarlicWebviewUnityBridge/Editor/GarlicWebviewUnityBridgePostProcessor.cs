@@ -26,8 +26,8 @@ public static class GarlicWebviewUnityBridgePostProcessor {
 			var targetGuid = proj.TargetGuidByName(PBXProject.GetUnityTargetName());
 
 			//// Configure build settings
-			proj.AddBuildProperty(targetGuid, "SWIFT_OBJC_BRIDGING_HEADER", "Libraries/GarlicWebview/Plugins/iOS/GarlicWebviewUnityBridge/Classes/GarlicWebviewUnityBridge-Bridging-Header.h");
-			proj.AddBuildProperty(targetGuid, "SWIFT_OBJC_INTERFACE_HEADER_NAME", "GarlicWebviewUnityBridge/GarlicWebviewUnityBridge-Swift.h");
+			//proj.AddBuildProperty(targetGuid, "SWIFT_OBJC_BRIDGING_HEADER", "Libraries/GarlicWebview/Plugins/iOS/GarlicWebviewUnityBridge/Classes/GarlicWebviewUnityBridge-Bridging-Header.h");
+			//proj.AddBuildProperty(targetGuid, "SWIFT_OBJC_INTERFACE_HEADER_NAME", "GarlicWebviewUnityBridge/GarlicWebviewUnityBridge-Swift.h");
 			proj.SetBuildProperty (targetGuid, "SWIFT_VERSION", "5.0");
 
 			const string defaultLocationInProj = "GarlicWebview/Plugins/iOS/";
