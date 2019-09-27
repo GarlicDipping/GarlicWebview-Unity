@@ -19,7 +19,12 @@ namespace Garlic.Plugins.Webview
 
 		public void OnClickShowWebview()
 		{
+			#if UNITY_ANDROID
 			int marginPx = (int)GarlicUtils.DPToPx (30f);
+			#elif UNITY_IOS
+			int marginPx = (int)GarlicUtils.PtToPx(30);
+			#endif
+
 			GarlicWebview.Instance.SetMargins(marginPx, marginPx, marginPx, marginPx);
 			GarlicWebview.Instance.SetFixedRatio(2, 1);
 			GarlicWebview.Instance.Show(urlText.text);

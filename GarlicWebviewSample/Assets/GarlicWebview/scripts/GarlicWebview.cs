@@ -135,6 +135,12 @@ namespace Garlic.Plugins.Webview
 		[DllImport("__Internal")]
 		internal static extern void __IOS_Dispose();
 
+		[DllImport("__Internal")]
+		internal static extern float __IOS_PtToPx (int pt);
+
+		[DllImport("__Internal")]
+		internal static extern float __IOS_PxToPt (int px);
+
 		#region Callback from native
 
 		void __fromnative_onReceiverdError(string message)
