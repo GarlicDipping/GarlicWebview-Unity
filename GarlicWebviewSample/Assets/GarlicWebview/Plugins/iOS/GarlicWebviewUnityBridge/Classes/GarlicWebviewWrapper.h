@@ -10,11 +10,5 @@
 #define GarlicWebviewWrapper_h
 
 #import <Foundation/Foundation.h>
-#import "GarlicWebview/GarlicWebview-Swift.h"
-#import "GarlicWebviewUnityBridge/GarlicWebviewUnityBridge-Swift.h"
-
-@interface GarlicWebviewWrapper : NSObject
-+ (GarlicWebviewUnityWrapper *) webviewInstance;
-@end
 
 #endif /* GarlicWebviewWrapper_h */
