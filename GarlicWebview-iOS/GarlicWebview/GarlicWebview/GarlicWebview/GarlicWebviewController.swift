@@ -249,15 +249,35 @@ public class GarlicWebviewController: NSObject {
                 //landscape mode
                 //keep height, resize width
                 let targetWidth = marginedFrame.height * ratioRate
-                let targetInset = (marginedFrame.width - targetWidth) / 2.0
-                marginedFrame = marginedFrame.insetBy(dx: targetInset, dy: 0)
+                var targetInset = (marginedFrame.width - targetWidth) / 2.0
+                if(targetInset < 0)
+                {
+                    //needed to increase width. to keep minimum margins, decrease height instead.
+                    let targetHeight = marginedFrame.width / ratioRate
+                    targetInset = (marginedFrame.height - targetHeight) / 2.0
+                    marginedFrame = marginedFrame.insetBy(dx: 0, dy: targetInset)
+                }
+                else
+                {
+                    marginedFrame = marginedFrame.insetBy(dx: targetInset, dy: 0)
+                }
             }
             else {
                 //portrait mode
                 //keep width, resize height
                 let targetHeight = marginedFrame.width / ratioRate
-                let targetInset = (marginedFrame.height - targetHeight) / 2.0
-                marginedFrame = marginedFrame.insetBy(dx: 0, dy: targetInset)
+                var targetInset = (marginedFrame.height - targetHeight) / 2.0
+                if(targetInset < 0)
+                {
+                    //needed to increase height. to keep minimum margins, decrease width instead.
+                    let targetWidth = marginedFrame.height * ratioRate
+                    targetInset = (marginedFrame.width - targetWidth) / 2.0
+                    marginedFrame = marginedFrame.insetBy(dx: targetInset, dy: 0)
+                }
+                else
+                {
+                    marginedFrame = marginedFrame.insetBy(dx: 0, dy: targetInset)
+                }
             }
         }
         //print("w / h : " + (marginedFrame.width / marginedFrame.height).description)
