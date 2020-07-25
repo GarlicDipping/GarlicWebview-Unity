@@ -371,13 +371,5 @@ public class GarlicWebviewController: NSObject {
             parent?.garlicDelegate?.onReceivedError(message: withError.localizedDescription)
             print("WebView content load failed / OnPageError:[\(withError.localizedDescription)]")
         }
-        
-        public func webView(_ uiWebView: UIWebView, didFailLoadWithError: Error) {
-            if(uiWebView.isHidden) {
-                return
-            }
-            parent?.garlicDelegate?.onReceivedError(message: didFailLoadWithError.localizedDescription)
-            print("WebView content load failed / OnPageError:[\(didFailLoadWithError.localizedDescription)]")
-        }
     }
 }
