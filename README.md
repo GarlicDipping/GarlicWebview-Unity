@@ -118,4 +118,11 @@ void Start()
 </code></pre>
 
 See GarlicWebviewSample project to learn more about this plugin. 
-Tested on Samsung Galaxy s8, sample project built with Unity2017.4.26f1 LTS.
+
+### Test device
+- Samsung Galaxy s8 
+- iPad Air
+
+### Test Unity version 
+- 2017.4.40f1
+- 2019.4.0f1
