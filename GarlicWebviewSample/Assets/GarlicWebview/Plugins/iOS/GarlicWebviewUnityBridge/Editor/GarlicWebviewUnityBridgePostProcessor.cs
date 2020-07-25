@@ -12,7 +12,8 @@ using UnityEditor.iOS.Xcode;
 using UnityEditor.iOS.Xcode.Extensions;
 #endif
 
-public static class GarlicWebviewUnityBridgePostProcessor {
+public static class GarlicWebviewUnityBridgePostProcessor
+{
 #if UNITY_IOS
 	[PostProcessBuild]
 	public static void OnPostProcessBuild(BuildTarget buildTarget, string buildPath) {
@@ -23,7 +24,12 @@ public static class GarlicWebviewUnityBridgePostProcessor {
 			var proj = new PBXProject();
 			proj.ReadFromFile(projPath);
 
-			var targetGuid = proj.TargetGuidByName(PBXProject.GetUnityTargetName());
+			
+#if UNITY_2019_3_OR_NEWER
+			var targetGuid = proj.GetUnityMainTargetGuid();
+#else
+            var targetGuid = proj.TargetGuidByName(PBXProject.GetUnityTargetName());
+#endif
 
 			//// Configure build settings
 			//proj.AddBuildProperty(targetGuid, "SWIFT_OBJC_BRIDGING_HEADER", "Libraries/GarlicWebview/Plugins/iOS/GarlicWebviewUnityBridge/Classes/GarlicWebviewUnityBridge-Bridging-Header.h");
